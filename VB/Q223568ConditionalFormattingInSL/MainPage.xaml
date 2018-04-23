@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Q223568ConditionalFormattingInSL.MainPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxght="clr-namespace:DevExpress.Xpf.Grid.HitTest;assembly=DevExpress.Xpf.Grid.v11.1" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+      xmlns:dxgcore="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+    xmlns:local="clr-namespace:Q223568ConditionalFormattingInSL"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"           
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    d:DesignHeight="273" d:DesignWidth="633">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="GridRowThemeKey_RowControlContainerTemplate" TargetType="ContentControl">
+            <Grid>
+                <Grid.Background>
+                    <Binding Path="EvenRow">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter TrueValue="Red" FalseValue="Transparent" />
+                        </Binding.Converter>
+                    </Binding>
+                </Grid.Background>
+                <Grid>
+                    <Grid.Background>
+                        <Binding Path="(dxe:BaseEdit.HasValidationError)">
+                            <Binding.Converter>
+                                <dx:BoolToObjectConverter TrueValue="#FFFFD9D9" FalseValue="Transparent" />
+                            </Binding.Converter>
+                        </Binding>
+                    </Grid.Background>
+
+                    <Border x:Name="RowContentBorder" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}">
+
+                        <Border.Background>
+                            <Binding Path="SelectionState">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter>
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="None" Value="Transparent" />
+                                            <dx:EnumObjectProvider x:Key="Selected" Value="Orange" />
+                                            <dx:EnumObjectProvider x:Key="Focused" Value="Magenta" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.Background>
+
+
+                        <Border.BorderThickness>
+                            <Binding Path="View.ShowHorizontalLines">
+                                <Binding.Converter>
+                                    <dx:BoolToObjectConverter TrueValue="0,0,0,1" FalseValue="0" />
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.BorderThickness>
+                        <ContentPresenter />
+                    </Border>
+
+                </Grid>
+            </Grid>
+
+        </ControlTemplate>
+
+        <Style TargetType="dxg:GridRowContent">
+            <Setter Property="Template" Value="{StaticResource GridRowThemeKey_RowControlContainerTemplate}" />
+            <Setter Property="BorderBrush" Value="Red" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White" Width="628">
+        <dxg:GridControl x:Name="grid">
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view" AllowBestFit="True">
+
+                </dxg:TableView>
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Red" />
+                <dxg:GridColumn FieldName="Green" />
+                <dxg:GridColumn FieldName="Blue" />
+                <dxg:GridColumn FieldName="Text">
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>
