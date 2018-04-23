@@ -1,0 +1,2543 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxgcore="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing" xmlns:dxg="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v10.2" xmlns:dxgl="clr-namespace:DevExpress.Xpf.Grid.LookUp;assembly=DevExpress.Xpf.Grid.v10.2" xmlns:dxght="clr-namespace:DevExpress.Xpf.Grid.HitTest;assembly=DevExpress.Xpf.Grid.v10.2" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.Xpf.Grid.v10.2;component/Themes/Generic/PrintingTemplates.SL.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ResourceDictionary x:Key="EditorsDictionary" Source="/DevExpress.Xpf.Core.v10.2;component/Themes/generic.xaml" />
+
+    <!--START Include: \LightGray\ColumnHeader.xaml -->
+
+
+    <SolidColorBrush x:Key="GridColumnHeaderThemeKey_HeadersVerticalLineBrush" Color="White" />
+    <SolidColorBrush x:Key="GridColumnHeaderThemeKey_HeaderCaptionForeground" Color="White" />
+    <SolidColorBrush x:Key="GridColumnHeaderThemeKey_GroupHeaderCaptionForeground" Color="#FF6E6E6E" />
+    <dx:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <ControlTemplate x:Key="GridColumnHeaderThemeKey_SortArrowUpTemplate">
+        <StackPanel VerticalAlignment="Center" UseLayoutRounding="True">
+            <Border Margin="0,0,0,1" x:Name="SortBySummaryIndicator" Width="7" Height="1" Background="{TemplateBinding Foreground}" BorderBrush="{x:Null}" Visibility="{Binding IsSortedBySummary, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Path Stretch="Fill" Fill="{TemplateBinding Foreground}" Data="F1 M 685,527L 682,521L 681,521L 678,527L 685,527 Z " Width="7" Height="6" />
+        </StackPanel>
+    </ControlTemplate>
+    <Style x:Key="GridColumnHeaderThemeKey_SortArrowUpStyle" TargetType="Control">
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Margin" Value="2,0,-1,1" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+    <ControlTemplate x:Key="GridColumnHeaderThemeKey_SortArrowDownTemplate">
+        <StackPanel VerticalAlignment="Center" UseLayoutRounding="True">
+            <Path Stretch="Fill" Fill="{TemplateBinding Foreground}" Data="F1 M 678,521L 681,527L 682,527L 685,521L 678,521 Z " Width="7" Height="6" />
+            <Border Margin="0,1,0,0" x:Name="SortBySummaryIndicator" Width="7" Height="1" Background="{TemplateBinding Foreground}" BorderBrush="{x:Null}" Visibility="{Binding IsSortedBySummary, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </StackPanel>
+
+    </ControlTemplate>
+    <Style x:Key="GridColumnHeaderThemeKey_SortArrowDownStyle" TargetType="Control">
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Margin" Value="2,0,-1,0" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+    <ControlTemplate x:Key="GridColumnHeaderThemeKey_ButtonContentTemplate" TargetType="ContentControl">
+        <Grid Width="Auto" Height="Auto">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="MouseOverGroup">
+                    <VisualState x:Name="Normal">
+                        <Storyboard FillBehavior="Stop">
+                            <DoubleAnimation Duration="00:00:00.5" Storyboard.TargetName="MouseOverElement" Storyboard.TargetProperty="Opacity" To="0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="00:00:00.5" Storyboard.TargetName="MouseOverElement" Storyboard.TargetProperty="Opacity" To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="00:00:00.0" Storyboard.TargetName="MouseOverElement" Storyboard.TargetProperty="Opacity" To="0" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="2" Background="Red">
+                <Border.CornerRadius>
+                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter DefaultValue="0">
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="Standalone" Value="3" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.CornerRadius>
+
+                <Border.Padding>
+                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter DefaultValue="0">
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="Left" Value="0,0,0,5" />
+                                    <dx:EnumObjectProvider x:Key="Middle" Value="0,0,0,5" />
+                                    <dx:EnumObjectProvider x:Key="Right" Value="0,0,0,5" />
+                                    <dx:EnumObjectProvider x:Key="Single" Value="0" />
+                                    <dx:EnumObjectProvider x:Key="Standalone" Value="0" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.Padding>
+                <Border x:Name="border1" Grid.ColumnSpan="2" Background="White">
+                    <Border.CornerRadius>
+                        <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter DefaultValue="0">
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Standalone" Value="3" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </Border.CornerRadius>
+
+                    <Border.Padding>
+                        <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter DefaultValue="1,0,1,1">
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Left" Value="0,0,0,1" />
+                                        <dx:EnumObjectProvider x:Key="Middle" Value="0,0,0,1" />
+                                        <dx:EnumObjectProvider x:Key="Right" Value="0,0,0,1" />
+                                        <dx:EnumObjectProvider x:Key="Single" Value="0,0,0,1" />
+                                        <dx:EnumObjectProvider x:Key="Standalone" Value="0" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </Border.Padding>
+
+                    <Border x:Name="border">
+                        <Border.Padding>
+                            <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter DefaultValue="0">
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="Left" Value="0,0,1,0" />
+                                            <dx:EnumObjectProvider x:Key="Middle" Value="0,0,1,0" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.Padding>
+                        <Border.CornerRadius>
+                            <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter DefaultValue="0">
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="Standalone" Value="3" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.CornerRadius>
+                        <Border.Background>
+                            <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter>
+                                        <dx:EnumToObjectConverter.DefaultValue>
+                                            <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                                                <GradientStop Color="OrangeRed" />
+                                                <GradientStop Color="Orange" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </dx:EnumToObjectConverter.DefaultValue>
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="Standalone">
+                                                <dx:EnumObjectProvider.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                                                        <GradientStop Color="#FFD7D7D7" />
+                                                        <GradientStop Color="#FFF2F2F2" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </dx:EnumObjectProvider.Value>
+                                            </dx:EnumObjectProvider>
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.Background>
+                        <Grid>
+                            <Border x:Name="MouseOverElement" Opacity="0">
+                                <Border.CornerRadius>
+                                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:EnumToObjectConverter DefaultValue="0">
+                                                <dx:EnumToObjectConverter.Values>
+                                                    <dx:EnumObjectProvider x:Key="Standalone" Value="3" />
+                                                </dx:EnumToObjectConverter.Values>
+                                            </dx:EnumToObjectConverter>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.CornerRadius>
+
+                                <Border.Background>
+                                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:EnumToObjectConverter>
+                                                <dx:EnumToObjectConverter.DefaultValue>
+                                                    <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                                                        <GradientStop Color="Coral" Offset="0" />
+                                                        <GradientStop Color="Red" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </dx:EnumToObjectConverter.DefaultValue>
+                                                <dx:EnumToObjectConverter.Values>
+                                                    <dx:EnumObjectProvider x:Key="Standalone">
+                                                        <dx:EnumObjectProvider.Value>
+                                                            <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                                                                <GradientStop Color="#c2c2c2" Offset="0" />
+                                                                <GradientStop Color="#dbdbdb" Offset="1" />
+                                                            </LinearGradientBrush>
+                                                        </dx:EnumObjectProvider.Value>
+                                                    </dx:EnumObjectProvider>
+                                                </dx:EnumToObjectConverter.Values>
+                                            </dx:EnumToObjectConverter>
+                                        </Binding.Converter>
+                                    </Binding>
+
+                                </Border.Background>
+                            </Border>
+                            <Border Visibility="{Binding IsPressedActually, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Border.CornerRadius>
+                                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:EnumToObjectConverter DefaultValue="0">
+                                                <dx:EnumToObjectConverter.Values>
+                                                    <dx:EnumObjectProvider x:Key="Standalone" Value="3" />
+                                                </dx:EnumToObjectConverter.Values>
+                                            </dx:EnumToObjectConverter>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.CornerRadius>
+                                <Border.Background>
+                                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:EnumToObjectConverter DefaultValue="#FF585858">
+                                                <dx:EnumToObjectConverter.Values>
+                                                    <dx:EnumObjectProvider x:Key="Standalone" Value="#FFc3c3c3" />
+                                                </dx:EnumToObjectConverter.Values>
+                                            </dx:EnumToObjectConverter>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.Background>
+                            </Border>
+
+                            <ContentPresenter VerticalAlignment="Center" Margin="4,3" />
+                        </Grid>
+                    </Border>
+                </Border>
+            </Border>
+            <Rectangle Stroke="{x:Null}" StrokeThickness="0" HorizontalAlignment="Right" Width="1" Fill="White " Grid.Column="1">
+                <Rectangle.Visibility>
+                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter DefaultValue="Collapsed">
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="Left" Value="Visible" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Rectangle.Visibility>
+                <Rectangle.Opacity>
+                    <Binding Path="View.ShowIndicator">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter FalseValue="0" TrueValue="1" />
+                        </Binding.Converter>
+                    </Binding>
+                </Rectangle.Opacity>
+            </Rectangle>
+            <Rectangle Stroke="{x:Null}" StrokeThickness="0" HorizontalAlignment="Right" x:Name="separator" Width="1" Fill="White " Grid.Column="1" Margin="0,0,0,5">
+                <Rectangle.Visibility>
+                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter DefaultValue="Collapsed">
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="Left" Value="Visible" />
+                                    <dx:EnumObjectProvider x:Key="Middle" Value="Visible" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Rectangle.Visibility>
+                <Rectangle.Opacity>
+                    <Binding Path="HasRightSibling">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter FalseValue="0" TrueValue="1" />
+                        </Binding.Converter>
+                    </Binding>
+                </Rectangle.Opacity>
+            </Rectangle>
+        </Grid>
+
+    </ControlTemplate>
+    <Style x:Key="GridColumnHeaderThemeKey_CaptionToArrowIndentBorderStyle" TargetType="Border">
+        <Setter Property="Width" Value="15" />
+    </Style>
+    <ControlTemplate x:Key="GridColumnHeaderThemeKey_ColumnFilterTemplate" TargetType="ToggleButton">
+        <Grid Margin="0,-2,0,0" VerticalAlignment="Stretch" Width="13" Height="13" Background="#00FF0000 ">
+            <Path Stretch="Fill" Fill="{TemplateBinding Foreground}" Opacity="0.6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="9" x:Name="path" Data="F1 M 393,284.5C 393,283.671 391.209,283 389,283C 386.791,283 385,283.671 385,284.5C 385,284.676 385.096,284.843 385.245,285L 385.232,285L 388,288L 388,292L 390,291L 390,288L 392.772,285L 392.755,285C 392.904,284.843 393,284.676 393,284.5 Z M 389,285C 387.896,285 387,284.776 387,284.5C 387,284.224 387.896,284 389,284C 390.105,284 391,284.224 391,284.5C 391,284.776 390.105,285 389,285 Z ">
+            </Path>
+            <Path Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" Stretch="Fill" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="9" Data="F1 M 393,284.5C 393,283.671 391.209,283 389,283C 386.791,283 385,283.671 385,284.5C 385,284.676 385.096,284.843 385.245,285L 385.232,285L 388,288L 388,292L 390,291L 390,288L 392.772,285L 392.755,285C 392.904,284.843 393,284.676 393,284.5 Z M 389,285C 387.896,285 387,284.776 387,284.5C 387,284.224 387.896,284 389,284C 390.105,284 391,284.224 391,284.5C 391,284.776 390.105,285 389,285 Z " />
+            <Path Visibility="{Binding IsPressed, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" Stretch="Fill" Fill="{TemplateBinding Foreground}" Opacity="0.3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="9" Data="F1 M 393,284.5C 393,283.671 391.209,283 389,283C 386.791,283 385,283.671 385,284.5C 385,284.676 385.096,284.843 385.245,285L 385.232,285L 388,288L 388,292L 390,291L 390,288L 392.772,285L 392.755,285C 392.904,284.843 393,284.676 393,284.5 Z M 389,285C 387.896,285 387,284.776 387,284.5C 387,284.224 387.896,284 389,284C 390.105,284 391,284.224 391,284.5C 391,284.776 390.105,285 389,285 Z " />
+            <Path Visibility="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" Stretch="Fill" Fill="{TemplateBinding Foreground}" Opacity="0.3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="9" Data="F1 M 393,284.5C 393,283.671 391.209,283 389,283C 386.791,283 385,283.671 385,284.5C 385,284.676 385.096,284.843 385.245,285L 385.232,285L 388,288L 388,292L 390,291L 390,288L 392.772,285L 392.755,285C 392.904,284.843 393,284.676 393,284.5 Z M 389,285C 387.896,285 387,284.776 387,284.5C 387,284.224 387.896,284 389,284C 390.105,284 391,284.224 391,284.5C 391,284.776 390.105,285 389,285 Z " />
+        </Grid>
+    </ControlTemplate>
+    <!--END Include: \LightGray\ColumnHeader.xaml -->
+    <!--START Include: \LightGray\ExpandButtons.xaml -->
+
+    <dx:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterInverted" Invert="True" />
+
+    <ControlTemplate x:Key="GroupRowThemeKey_ExpandButtonTemplate" TargetType="dx:ToggleStateButton">
+        <Grid Width="11" Height="11" x:Name="root">
+            <Grid.Resources>
+                <Storyboard FillBehavior="HoldEnd" x:Key="expand">
+                    <DoubleAnimation Duration="00:00:00.2" Storyboard.TargetName="ExpandButtonRotate" Storyboard.TargetProperty="Angle" To="90" />
+                </Storyboard>
+                <Storyboard FillBehavior="HoldEnd" x:Key="collapse">
+                    <DoubleAnimation Duration="00:00:00.2" Storyboard.TargetName="ExpandButtonRotate" Storyboard.TargetProperty="Angle" To="0" />
+                </Storyboard>
+            </Grid.Resources>
+            <Ellipse Cursor="Hand" Fill="Red" Opacity="0" />
+            <Path Stretch="Fill" RenderTransformOrigin="0.5, 0.5" Data="F1 M 692,518L 692,529L 702,524L 702,523L 692,518 Z " HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Cursor="Hand" Fill="{TemplateBinding Foreground}" Width="8" Height="9">
+                <Path.RenderTransform>
+                    <RotateTransform x:Name="ExpandButtonRotate">
+                        <!--<RotateTransform.Angle>
+                            <Binding Path="IsChecked" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:BoolToObjectConverter TrueValue="90" FalseValue="0"/>
+                                </Binding.Converter>
+                            </Binding>
+                        </RotateTransform.Angle>-->
+                    </RotateTransform>
+                </Path.RenderTransform>
+            </Path>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="GroupRowThemeKey_ExpandButtonStyle" TargetType="dx:ToggleStateButton">
+
+
+        <Setter Property="Width" Value="11" />
+        <Setter Property="Height" Value="11" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template" Value="{StaticResource GroupRowThemeKey_ExpandButtonTemplate}" />
+    </Style>
+    <!--END Include: \LightGray\ExpandButtons.xaml -->
+    <!--START Include: \LightGray\Scrollbars.xaml -->
+    <!--
+          removed Color x:Key =BaseColor#FFD2E1ED-->
+    <!--
+          removed Color x:Key =BaseColor#FFD3E2EE-->
+    <!--
+          removed Color x:Key =BaseColor#FFBAC6D5-->
+    <!--
+          removed Color x:Key =BaseColor#FFFBFBFB-->
+    <!--
+          removed Color x:Key =BaseColor#FFEBEDEF-->
+    <!--
+          removed Color x:Key =BaseColor#FFF0F0F0-->
+    <!--
+          removed Color x:Key =BaseColor#FFEFEFEF-->
+    <Style x:Key="ScrollBarThemeKey_ScrollingCornerStyle" TargetType="Border">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="CornerRadius" Value="0,0,2,0" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <RadialGradientBrush>
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.671" ScaleY="2.671" />
+                            <SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5" />
+                            <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5" />
+                            <TranslateTransform X="-0.496" Y="-0.496" />
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FFFBFBFB" Offset="0.041" />
+                    <GradientStop Color="#FFEBEDEF" Offset="1" />
+                    <GradientStop Color="#FFF0F0F0" Offset="0.213" />
+                    <GradientStop Color="#FFEFEFEF" Offset="0.476" />
+                    <GradientStop Color="#FFEBEDEF" Offset="0.04" />
+                    <GradientStop Color="#FFEBEDEF" Offset="0" />
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--END Include: \LightGray\Scrollbars.xaml -->
+    <!--START Include: \LightGray\GridItemsContainer.xaml -->
+    <!--
+          removed Color x:Key =BaseColor#FFC1C1C1-->
+    <!--
+          removed Color x:Key =BaseColor#FF668CC4-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FFFFFFFF-->
+    <SolidColorBrush x:Key="OuterBorder1ColorBrush" Color="#FF668CC4" />
+    <SolidColorBrush x:Key="OuterBorder2ColorBrush" Color="#FFC1C1C1" />
+    <SolidColorBrush x:Key="InnerBorderColorBrush" Color="Transparent" />
+    <DataTemplate x:Key="GridRowThemeKey_DataRowsTemplate">
+        <Border x:Name="innerBorder" Background="#FFFFFFFF " BorderBrush="{StaticResource InnerBorderColorBrush}" Margin="0,0,0,-1">
+            <dxg:GridViewDataRowsControl />
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="GroupRowThemeKey_GroupRowsTemplate">
+        <Border Background="#FFFFFFFF ">
+            <dxg:GridViewGroupRowsControl />
+        </Border>
+    </DataTemplate>
+
+    <!--END Include: \LightGray\GridItemsContainer.xaml -->
+    <!--START Include: \LightGray\RowIndicator.xaml -->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FFB50606-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FFEFF5FE-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FF87A9D6-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FFFFFFFF-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FFDFEDFF-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FF6F9DD9-->
+
+    <DataTemplate x:Key="RowIndicatorThemeKey_RowTemplate">
+        <Border Background="Orange" BorderBrush="White" BorderThickness="0,0,1,0">
+            <ContentPresenter Margin="0,-1,0,0" Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{Binding Path=View.RowIndicatorContentTemplate}" />
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_GroupRowTemplate">
+        <Border Background="Orange" Padding="0,0,0,1">
+            <Border Background="Orange" BorderBrush="Orange" BorderThickness="0,0,1,0">
+                <ContentPresenter Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{Binding Path=View.RowIndicatorContentTemplate}" />
+            </Border>
+        </Border>
+    </DataTemplate>
+    <ControlTemplate x:Key="RowIndicatorThemeKey_GroupBorderTemplate" TargetType="ContentControl">
+        <Border x:Name="groupBorder" Background="Transparent">
+            <Border.Padding>
+                <Binding Path="IsLastVisibleElementRow">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter>
+                            <dx:BoolToObjectConverter.TrueValue>
+                                <Thickness>0,0,0,1</Thickness>
+                            </dx:BoolToObjectConverter.TrueValue>
+                            <dx:BoolToObjectConverter.FalseValue>
+                                <Thickness>0</Thickness>
+                            </dx:BoolToObjectConverter.FalseValue>
+                        </dx:BoolToObjectConverter>
+                    </Binding.Converter>
+                </Binding>
+            </Border.Padding>
+            <ContentPresenter />
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RowIndicatorThemeKey_GroupItemsControlTemplate" TargetType="ContentControl">
+        <ContentPresenter x:Name="content">
+            <ContentPresenter.Margin>
+                <Binding Path="RowsContainer.IsGroupRowsContainer">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter>
+                            <dx:BoolToObjectConverter.TrueValue>
+                                <Thickness>0</Thickness>
+                            </dx:BoolToObjectConverter.TrueValue>
+                            <dx:BoolToObjectConverter.FalseValue>
+                                <Thickness>0,0,0,-1</Thickness>
+                            </dx:BoolToObjectConverter.FalseValue>
+                        </dx:BoolToObjectConverter>
+                    </Binding.Converter>
+                </Binding>
+            </ContentPresenter.Margin>
+        </ContentPresenter>
+    </ControlTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_FocusedIconTemplate">
+        <Path Stretch="Fill" Fill="White" Data="F1 M 382,1021L 386,1025L 382,1029L 382,1021 Z " Width="4" Height="8" Margin="1,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_ChangedIconTemplate">
+        <Path Stretch="Fill" Fill="White " Data="F1 M 399,1021L 397,1021L 397,1022L 399,1022M 394,1022L 396,1022L 396,1021L 394,1021M 399,1028L 397,1028L 397,1029L 399,1029M 394,1029L 396,1029L 396,1028L 394,1028M 396,1028L 397,1028L 397,1022L 396,1022L 396,1028 Z " Width="5" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_NewItemRowIconTemplate">
+        <Path Stretch="Fill" Fill="White " Data="F1 M 398,1050L 399,1048L 397,1049L 396.5,1046L 396,1049L 394,1048L 395,1050L 392,1050.5L 395,1051L 394,1053L 396,1052L 396.5,1055L 397,1052L 399,1053L 398,1051L 401,1050.5L 398,1050 Z " Width="9" Height="9" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,1,0,0" />
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_EditingIconTemplate">
+        <Path Stretch="Fill" Fill="White " Data="F1 M 405,1027L 405,1029L 407,1029L 410,1026L 408,1024M 411,1021L 409,1023L 411,1025L 413,1023L 411,1021 Z " Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="1,0,0,0" />
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_ErrorIconTemplate">
+        <Path Stretch="Fill" Fill="White " Data="F1 M 412,1040L 411,1041L 409.5,1039.5L 408,1041L 407,1040L 408.5,1038.5L 407,1037L 408,1036L 409.5,1037.5L 411,1036L 412,1037L 410.5,1038.5M 409.5,1034C 407.016,1034 405,1036.02 405,1038.5C 405,1040.98 407.016,1043 409.5,1043C 411.984,1043 414,1040.98 414,1038.5C 414,1036.02 411.984,1034 409.5,1034 Z " Width="9" Height="9" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,0,0" />
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_FocusedErrorIconTemplate">
+        <Path Stretch="Fill" Fill="White " Data="F1 M 412,1040L 411,1041L 409.5,1039.5L 408,1041L 407,1040L 408.5,1038.5L 407,1037L 408,1036L 409.5,1037.5L 411,1036L 412,1037L 410.5,1038.5M 409.5,1034C 407.016,1034 405,1036.02 405,1038.5C 405,1040.98 407.016,1043 409.5,1043C 411.984,1043 414,1040.98 414,1038.5C 414,1036.02 411.984,1034 409.5,1034 Z " HorizontalAlignment="Center" Margin="0,1,0,0" VerticalAlignment="Center" Width="9" Height="9" />
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_AutoFilterRowIconTemplate">
+        <Path Stretch="Fill" Fill="White " Data="F1 M 381,1035L 384,1038L 384,1042L 385,1042L 385,1038L 388,1035L 381,1035 Z " Width="7" Height="7" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,0,0" />
+    </DataTemplate>
+    <ControlTemplate x:Key="RowIndicatorThemeKey_RowPanelTemplate" TargetType="ContentControl">
+        <Grid Background="Orange">
+            <ContentPresenter />
+            <Border Background="White" Width="1" HorizontalAlignment="Right" />
+        </Grid>
+    </ControlTemplate>
+    <!--END Include: \LightGray\RowIndicator.xaml -->
+    <!--START Include: \LightGray\Rows.xaml -->
+
+
+    <SolidColorBrush x:Key="GroupGridRowBorderBrush" Color="#FFC6D7ED " />
+    <SolidColorBrush x:Key="GroupGridRowHeaderTextBrush" Color="#FF464646" />
+    <SolidColorBrush x:Key="DataRowTextBrush" Color="#FF000000 " />
+    <SolidColorBrush x:Key="DataRowTextFocusedBrush" Color="#FF000000 " />
+    <SolidColorBrush x:Key="GroupRowFocusedBrush" Color="#FFFFFFFF " />
+    <SolidColorBrush x:Key="GridRowThemeKey_GridDataRowDelimiterBrush" Color="#FFD3D3D3 " />
+    <SolidColorBrush x:Key="GridRowThemeKey_BorderNoneBrush" Color="#FFFFFFFF " />
+    <SolidColorBrush x:Key="GridRowThemeKey_BorderSelectedBrush" Color="#FFDBE9F9 " />
+    <LinearGradientBrush x:Key="GridRowThemeKey_BorderFocusedBrush" EndPoint="0.5,0" StartPoint="0.5,1">
+        <GradientStop Color="#FBC151" />
+        <GradientStop Color="Orange" Offset="1" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="GridRowThemeKey_TextFocusedBrush" Color="#FFFFFFFF" />
+
+    <ControlTemplate x:Key="GroupRowThemeKey_GroupRowControlContainerTemplate" TargetType="ContentControl">
+        <Border x:Name="groupBorder" BorderBrush="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" UseLayoutRounding="True">
+            <Border.BorderThickness>
+                <Binding Path="IsLastVisibleElementRow">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter>
+                            <dx:BoolToObjectConverter.TrueValue>
+                                <Thickness>0,0,0,1</Thickness>
+                            </dx:BoolToObjectConverter.TrueValue>
+                            <dx:BoolToObjectConverter.FalseValue>
+                                <Thickness>0</Thickness>
+                            </dx:BoolToObjectConverter.FalseValue>
+                        </dx:BoolToObjectConverter>
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>
+            <ContentPresenter />
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="GroupRowThemeKey_GroupRowControlHeaderContentTemplate" TargetType="ContentControl">
+        <Border x:Name="ContentBorder" BorderBrush="{StaticResource GroupGridRowBorderBrush}" BorderThickness="0" Visibility="{Binding IsGroupRowVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+            <ContentPresenter />
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="GroupRowThemeKey_GroupRowPresenterStyle" TargetType="dxg:GroupGridRowPresenter">
+    </Style>
+    <Style x:Key="GroupRowThemeKey_GroupRowControlExpanderStyle" TargetType="dx:DXExpander">
+        <Setter Property="Margin" Value="28,0,0,0" />
+        <Setter Property="AnimationProgress" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalExpand" Value="None" />
+        <Setter Property="VerticalExpand" Value="FromTopToBottom" />
+    </Style>
+
+    <ControlTemplate x:Key="GridRowThemeKey_RowControlContainerTemplate" TargetType="ContentControl">
+
+        <Grid>
+            <Grid.Background>
+                <Binding Path="(dxe:BaseEdit.HasValidationError)">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="#FFFFD9D9" FalseValue="Transparent" />
+                    </Binding.Converter>
+                </Binding>
+            </Grid.Background>
+
+            <Border x:Name="RowContentBorder" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}">
+
+                <Border.Background>
+                    <Binding Path="SelectionState">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter>
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="None" Value="Transparent" />
+                                    <dx:EnumObjectProvider x:Key="Selected" Value="{StaticResource GridRowThemeKey_BorderSelectedBrush}" />
+                                    <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_BorderFocusedBrush}" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.Background>
+
+
+                <Border.BorderThickness>
+                    <Binding Path="View.ShowHorizontalLines">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter TrueValue="0,0,0,1" FalseValue="0" />
+                        </Binding.Converter>
+                    </Binding>
+                </Border.BorderThickness>
+                <ContentPresenter />
+            </Border>
+
+        </Grid>
+
+
+    </ControlTemplate>
+    <!--END Include: \LightGray\Rows.xaml -->
+    <!--START Include: \Generic\HeaderFooterItemsControlStyles.xaml -->
+
+    <Style x:Key="GridControlThemeKey_GroupPanelStyle" TargetType="dx:DXDockPanel">
+        <Setter Property="dx:DragManager.DropTargetFactory">
+            <Setter.Value>
+                <dxg:GroupPanelColumnHeaderDropTargetFactoryExtension />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GroupRowThemeKey_GroupItemsControlStyle" TargetType="dx:CachedItemsControl">
+        <Setter Property="Height" Value="Auto" />
+
+        <Setter Property="dxg:GridColumn.HeaderPresenterType" Value="GroupPanel" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ControlTemplate>
+                    <dx:DXDockPanel dxg:GridColumn.HeaderPresenterType="GroupPanel" Name="groupHeadersPanel" Background="Transparent" LastChildFill="False" Style="{StaticResource GridControlThemeKey_GroupPanelStyle}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <dxg:GridColumnHeader dxg:GridColumn.HeaderPresenterType="GroupPanel" DataContext="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumnHeader.GridColumn="{Binding}" dxg:GridColumn.VisibleIndex="{Binding Path=(dxg:GridColumn.GroupIndex)}" dxg:GridPopupMenu.GridMenuType="Column" dxb:BarManager.DXContextMenu="{Binding Path=View.GridMenu}">
+                        <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                            <dxght:GroupPanelColumnHeaderTableViewHitTestAcceptor />
+                        </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                    </dxg:GridColumnHeader>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--END Include: \Generic\HeaderFooterItemsControlStyles.xaml -->
+    <!--START Include: \LightGray\TotalSummary.xaml -->
+    <!--
+          removed Color x:Key =BaseColor#FFCEDBEE-->
+    <!--
+          removed Color x:Key =BaseColor#FF9CB5DA-->
+    <!--
+          removed Color x:Key =BaseColor#FFDBE5F4-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FFFFFFFF-->
+    <ControlTemplate x:Key="TotalSummaryThemeKey_TotalSummaryControlTemplate">
+        <Border Background="Transparent" BorderBrush="White" Margin="-1,6,0,6">
+            <Border.BorderThickness>
+                <Binding Path="Column.HasLeftSibling">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="1,0,0,0" FalseValue="0" />
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>
+            <Border.Opacity>
+                <Binding Path="Column.HasTotalSummaries">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="1" FalseValue="0" />
+                    </Binding.Converter>
+                </Binding>
+            </Border.Opacity>
+            <Grid Margin="6,0,0,0" Name="rootGrid">
+                <Border BorderBrush="White">
+                    <Border.BorderThickness>
+                        <Binding Path="Column.HasRightSibling">
+                            <Binding.Converter>
+                                <dx:BoolToObjectConverter TrueValue="0,0,1,0" FalseValue="0" />
+                            </Binding.Converter>
+                        </Binding>
+                    </Border.BorderThickness>
+                    <dxg:TotalSummaryContentPresenter DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource TemplatedParent}}" Style="{Binding Path=Column.ActualTotalSummaryContentStyle}" Content="{Binding}" ContentTemplateSelector="{Binding Path=Column.View.ActualTotalSummaryItemTemplateSelector}" />
+                </Border>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="TotalSummaryThemeKey_TotalSummaryContentStyle" TargetType="dx:DataContentPresenter">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Margin" Value="3" />
+    </Style>
+    <!--END Include: \LightGray\TotalSummary.xaml -->
+    <!--START Include: \LightGray\GridView.xaml -->
+
+
+    <dxg:NewItemRowPositionToVisibilityConverter x:Key="NewItemRowPositionToVisibilityConverter" />
+
+
+
+    <sys:Double x:Key="TableViewThemeKey_LeftDataAreaIndent">0</sys:Double>
+    <sys:Double x:Key="TableViewThemeKey_RightDataAreaIndent">0</sys:Double>
+    <sys:Double x:Key="TableViewThemeKey_LeftGroupAreaIndent">28</sys:Double>
+    <sys:Double x:Key="TableViewThemeKey_RightGroupAreaIndent">0</sys:Double>
+    <sys:Double x:Key="TableViewThemeKey_FixedLineWidth">3</sys:Double>
+    <sys:Double x:Key="TableViewThemeKey_IndicatorWidth">27</sys:Double>
+    <Thickness x:Key="TableViewThemeKey_Margin">0</Thickness>
+    <Thickness x:Key="TableViewThemeKey_HorizontalScrollbarMargin">0,0,0,0</Thickness>
+    <Thickness x:Key="TableViewThemeKey_RowPresenterGridMargin">0,0,0,0</Thickness>
+    <Thickness x:Key="TableViewThemeKey_IndicatorMargin">0,0,0,0</Thickness>
+    <SolidColorBrush x:Key="GridRowThemeKey_CellBorderNoneBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="GridRowThemeKey_CellBorderFocusedBrush" Color="#FFdbe9f9" />
+    <SolidColorBrush x:Key="GridRowThemeKey_CellTextFocusedBrush" Color="#FF000000 " />
+
+    <ControlTemplate x:Key="TotalSummaryThemeKey_FootersContentTemplate" TargetType="ContentControl">
+        <ContentPresenter Margin="0,3,0,2" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TableViewThemeKey_OuterBorderElementTemplate" TargetType="dxg:OuterBorderElement">
+    </ControlTemplate>
+    <Style x:Key="TableViewThemeKey_ColumnChooserDragTextStyle" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="#FFA3A3A3" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="35,4" />
+    </Style>
+    <Style x:Key="TableViewThemeKey_GroupPanelDragTextStyle" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="MinHeight" Value="15" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Margin" Value="0,4,0,5" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+    <ControlTemplate x:Key="TableViewThemeKey_GroupPanelContentTemplate" TargetType="Control">
+        <dx:MeasurePixelSnapper>
+            <Border x:Name="GroupPanelBorder" Background="Orange" BorderBrush="White" BorderThickness="0,0,0,1" CornerRadius="3,3,0,0">
+                <!--<Border.CornerRadius>
+                    <Binding Path="(dxg:GridBorderHelper.ShowBorder)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter FalseValue="0" TrueValue="3,3,0,0"/>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.CornerRadius>-->
+                <Grid Margin="8">
+                    <TextBlock x:Name="PART_GroupPanelDragText" Style="{StaticResource TableViewThemeKey_GroupPanelDragTextStyle}">
+                         <TextBlock.Text>
+                            <Binding Path="(dxg:GridControl.CurrentView).LocalizationDescriptor" RelativeSource="{RelativeSource TemplatedParent}" ConverterParameter="GridGroupPanelText">
+                                <Binding.Converter>
+                                    <dxg:DynamicLocalizationStringValueConvertor />
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <dx:CachedItemsControl ItemsSource="{Binding Path=(dxg:GridControl.CurrentView).GroupedColumns, RelativeSource={RelativeSource TemplatedParent}}" x:Name="groupPanelItemsControl" Style="{StaticResource GroupRowThemeKey_GroupItemsControlStyle}" />
+                </Grid>
+            </Border>
+        </dx:MeasurePixelSnapper>
+    </ControlTemplate>
+    <DataTemplate x:Key="TotalSummaryThemeKey_TotalSummaryItemTemplate">
+        <TextBlock Text="{Binding Column.TotalSummaryText}" />
+    </DataTemplate>
+
+    <Style x:Key="GroupRowThemeKey_GroupRowStyle" TargetType="ContentControl">
+        <Setter Property="Foreground" Value="#FF6E6E6E" />
+        <Setter Property="Background" Value="{StaticResource GroupGridRowBorderBrush}" />
+
+    </Style>
+    <ControlTemplate x:Key="GroupRowThemeKey_GroupRowContentTemplate" TargetType="ContentControl">
+        <Border x:Name="topBorder" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+            <Border x:Name="groupRowBorder" Background="#FFE9E9E9" BorderBrush="#FFD3D3D3" BorderThickness="0,0,0,1">
+                <Grid dx:FrameworkElementHelper.EnableIsMouseOverOverride="True">
+                    <Grid.Background>
+                        <Binding Path="(dx:FrameworkElementHelper.IsMouseOverOverride)" RelativeSource="{RelativeSource Self}">
+                            <Binding.Converter>
+                                <dx:BoolToObjectConverter FalseValue="{StaticResource GridRowThemeKey_BorderNoneBrush}">
+                                    <dx:BoolToObjectConverter.TrueValue>
+                                        <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                                            <GradientStop Color="#FFDCDCDC" Offset="0" />
+                                            <GradientStop Color="#FFE2E2E2" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </dx:BoolToObjectConverter.TrueValue>
+                                </dx:BoolToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </Grid.Background>
+                    <Border x:Name="groupRowBorderSelected" Background="#FFD8D8D8">
+                        <Border.Visibility>
+                            <Binding Path="SelectionState">
+                                <Binding.Converter>
+                                    <dxg:SelectionStateToVisibilityConverter Value="Selected" />
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.Visibility>
+                    </Border>
+                    <Border x:Name="groupRowBorderFocused">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF9F9F9F" />
+                                <GradientStop Color="#FF8C8C8C" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Visibility>
+                            <Binding Path="SelectionState">
+                                <Binding.Converter>
+                                    <dxg:SelectionStateToVisibilityConverter Value="Focused" />
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.Visibility>
+                    </Border>
+                    <ContentPresenter />
+                </Grid>
+            </Border>
+        </Border>
+    </ControlTemplate>
+
+    <DataTemplate x:Key="GroupRowThemeKey_GroupValueTemplate">
+        <Border Style="{Binding Path=View.GroupValueContentStyle}" VerticalAlignment="Center" Padding="0,0,0,1">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=DisplayText}" />
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="GroupRowThemeKey_GroupRowTemplate">
+        <dx:MeasurePixelSnapper>
+            <dxg:GroupGridRowContent x:Name="PART_GroupRowContent" dxg:RowIndicatorViewInfo.ActualRowIndicatorHeight="{Binding CurrentHeight, RelativeSource={RelativeSource Self}, Mode=OneWay}" Style="{Binding Path=View.GroupRowStyle}">
+
+                <dxg:GroupGridRowContent.Foreground>
+                    <Binding Path="SelectionState">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter DefaultValue="#FF464646">
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="Focused" Value="White" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </dxg:GroupGridRowContent.Foreground>
+
+                <dx:DXDockPanel LastChildFill="false" Margin="0,2,0,2">
+                    <dxg:GridGroupExpandButton x:Name="Toggle" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=IsExpanded}" Foreground="{Binding Foreground, ElementName=PART_GroupRowContent}" />
+                    <dxg:GroupValueContentPresenter Content="{Binding Path=GroupValue}" ContentTemplateSelector="{Binding Path=Content.Column.ActualGroupValueTemplateSelector, RelativeSource={RelativeSource Self}}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,20,0">
+                    </dxg:GroupValueContentPresenter>
+                    <ItemsControl ItemsSource="{Binding Path=GroupSummaryData}" dx:DXDockPanel.Dock="Right" HorizontalAlignment="Right">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <dxg:GroupSummaryContentPresenter Margin="0,0,4,0" VerticalAlignment="Center" Content="{Binding}" ContentTemplateSelector="{Binding Path=View.ActualGroupSummaryItemTemplateSelector}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </dx:DXDockPanel>
+            </dxg:GroupGridRowContent>
+        </dx:MeasurePixelSnapper>
+    </DataTemplate>
+    <ControlTemplate x:Key="GridRowThemeKey_FilterRowTemplate" TargetType="ContentControl">
+        <Border Background="White" BorderBrush="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" BorderThickness="0,0,0,1">
+            <Grid>
+                <Border x:Name="borderFocused" Margin="0" UseLayoutRounding="True" Background="{StaticResource GridRowThemeKey_BorderFocusedBrush}">
+                    <Border.Visibility>
+                        <Binding Path="SelectionState">
+                            <Binding.Converter>
+                                <dxg:SelectionStateToVisibilityConverter Value="Focused" />
+                            </Binding.Converter>
+                        </Binding>
+                    </Border.Visibility>
+                </Border>
+                <ContentControl>
+                    <ContentPresenter />
+                </ContentControl>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridRowThemeKey_NewItemRowTemplate" TargetType="ContentControl">
+        <Grid>
+            <Border x:Name="rowDelimeterBorder" Background="White" BorderBrush="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" BorderThickness="0,0,0,1">
+                <Grid>
+                    <Border x:Name="borderFocused" Margin="0" UseLayoutRounding="True" Background="{StaticResource GridRowThemeKey_BorderFocusedBrush}">
+                        <Border.Visibility>
+                            <Binding Path="SelectionState">
+                                <Binding.Converter>
+                                    <dxg:SelectionStateToVisibilityConverter Value="Focused" />
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.Visibility>
+                    </Border>
+                    <ContentControl>
+                        <ContentPresenter />
+                    </ContentControl>
+                    <Border x:Name="backgroundBorder" Background="#FFFFFFFF " IsHitTestVisible="False" Visibility="{Binding Path=IsFocused, Converter={StaticResource BooleanToVisibilityConverterInverted}}">
+                        <dx:MeasurePixelSnapper>
+                            <TextBlock Foreground="#FFA3A3A3 " Margin="0,1,0,2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PART_GridNewRowText">
+                               <TextBlock.Text>
+                                    <Binding Path="View.LocalizationDescriptor" ConverterParameter="GridNewRowText">
+                                        <Binding.Converter>
+                                            <dxg:DynamicLocalizationStringValueConvertor />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </dx:MeasurePixelSnapper>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridRowThemeKey_FilterCellContentPresenterTemplate" TargetType="dxg:FilterCellContentPresenter">
+        <Border x:Name="ContentBorder" dxg:GridVerticalLinesHelper.VerticalLinesBrush="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}">
+
+            <dxg:GridVerticalLinesHelper.ShowVerticalLines>
+                <Binding Path="ShowVerticalLines" RelativeSource="{RelativeSource TemplatedParent}" />
+            </dxg:GridVerticalLinesHelper.ShowVerticalLines>
+            <dxg:GridVerticalLinesHelper.SelectionState>
+                <Binding Path="RowData.SelectionState" />
+            </dxg:GridVerticalLinesHelper.SelectionState>
+
+
+            <Border.BorderThickness>
+                <Binding Path="HasRightSibling" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="0,0,1,0" FalseValue="0" />
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>
+            <Border CornerRadius="2,2,2,2" Margin="2,2,2,2" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}">
+
+                <Border.Background>
+                    <Binding Path="SelectionState" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter>
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="None" Value="{StaticResource GridRowThemeKey_CellBorderNoneBrush}" />
+                                    <dx:EnumObjectProvider x:Key="Selected" Value="{StaticResource GridRowThemeKey_BorderSelectedBrush}" />
+                                    <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_CellBorderFocusedBrush}" />
+                                    <dx:EnumObjectProvider x:Key="FocusedAndSelected" Value="{StaticResource GridRowThemeKey_BorderFocusedBrush}" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.Background>
+
+                <dxgcore:FilterRowCellEditor x:Name="PART_CellEditor" Column="{Binding Column, RelativeSource={RelativeSource TemplatedParent}}" FieldName="{Binding FieldName, RelativeSource={RelativeSource TemplatedParent}}">
+
+                    <dxgcore:FilterRowCellEditor.FocusedRowForeground>
+                        <Binding Path="RowData.SelectionState">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter DefaultValue="Black">
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_TextFocusedBrush}" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </dxgcore:FilterRowCellEditor.FocusedRowForeground>
+                    <dxgcore:FilterRowCellEditor.FocusedCellForeground>
+                        <Binding Path="SelectionState" RelativeSource="{RelativeSource TemplatedParent}">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter>
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_CellTextFocusedBrush}" />
+                                        <dx:EnumObjectProvider x:Key="FocusedAndSelected" Value="{StaticResource GridRowThemeKey_TextFocusedBrush}" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </dxgcore:FilterRowCellEditor.FocusedCellForeground>
+                    <dxgcore:FilterRowCellEditor.Template>
+                        <ControlTemplate TargetType="ContentControl">
+                            <dxe:InplaceEditorContentPresenter />
+                        </ControlTemplate>
+                    </dxgcore:FilterRowCellEditor.Template>
+
+                </dxgcore:FilterRowCellEditor>
+            </Border>
+        </Border>
+
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridRowThemeKey_NewItemRowCellContentPresenterTemplate" TargetType="dxg:NewItemRowCellContentPresenter">
+        <Border x:Name="ContentBorder" dxg:GridVerticalLinesHelper.VerticalLinesBrush="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}">
+
+            <dxg:GridVerticalLinesHelper.ShowVerticalLines>
+                <Binding Path="ShowVerticalLines" RelativeSource="{RelativeSource TemplatedParent}" />
+            </dxg:GridVerticalLinesHelper.ShowVerticalLines>
+            <dxg:GridVerticalLinesHelper.SelectionState>
+                <Binding Path="RowData.SelectionState" />
+            </dxg:GridVerticalLinesHelper.SelectionState>
+
+
+            <Border.BorderThickness>
+                <Binding Path="HasRightSibling" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="0,0,1,0" FalseValue="0" />
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>
+            <Border CornerRadius="2,2,2,2" Margin="2,2,2,2" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}">
+                <!--<Border.BorderThickness>
+                <Binding Path="HasRightSibling" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="0,0,1,0" FalseValue="0"/>
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>-->
+
+                <Border.Background>
+                    <Binding Path="SelectionState" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter>
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="None" Value="{StaticResource GridRowThemeKey_CellBorderNoneBrush}" />
+                                    <dx:EnumObjectProvider x:Key="Selected" Value="{StaticResource GridRowThemeKey_BorderSelectedBrush}" />
+                                    <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_CellBorderFocusedBrush}" />
+                                    <dx:EnumObjectProvider x:Key="FocusedAndSelected" Value="{StaticResource GridRowThemeKey_BorderFocusedBrush}" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.Background>
+
+                <dxg:NewItemRowCellEditor x:Name="PART_CellEditor" Column="{Binding Column, RelativeSource={RelativeSource TemplatedParent}}" FieldName="{Binding FieldName, RelativeSource={RelativeSource TemplatedParent}}">
+
+                    <dxgcore:NewItemRowCellEditor.FocusedRowForeground>
+                        <Binding Path="RowData.SelectionState">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter DefaultValue="Black">
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_TextFocusedBrush}" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </dxgcore:NewItemRowCellEditor.FocusedRowForeground>
+                    <dxgcore:NewItemRowCellEditor.FocusedCellForeground>
+                        <Binding Path="SelectionState" RelativeSource="{RelativeSource TemplatedParent}">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter>
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_CellTextFocusedBrush}" />
+                                        <dx:EnumObjectProvider x:Key="FocusedAndSelected" Value="{StaticResource GridRowThemeKey_TextFocusedBrush}" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </dxgcore:NewItemRowCellEditor.FocusedCellForeground>
+                    <dxgcore:NewItemRowCellEditor.Template>
+                        <ControlTemplate TargetType="ContentControl">
+                            <dxe:InplaceEditorContentPresenter />
+                        </ControlTemplate>
+                    </dxgcore:NewItemRowCellEditor.Template>
+
+                </dxg:NewItemRowCellEditor>
+            </Border>
+        </Border>
+
+    </ControlTemplate>
+    <SolidColorBrush x:Key="TableViewThemeKey_ColumnChooserBackgroundBrush" Color="#FFFFFFFF " />
+    <DataTemplate x:Key="GridColumnHeaderThemeKey_FitColumnContentTemplate">
+        <Grid>
+            <dxg:FitColumnHeader dxg:GridColumn.ColumnPosition="Right" />
+            <Rectangle Stroke="{x:Null}" HorizontalAlignment="Left" Margin="0,0,0,5" x:Name="separator" Width="1" Fill="White" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="GridColumnHeaderThemeKey_FixedColumnsDelimiterTemplate">
+        <Border BorderBrush="#FFFFFFFF" BorderThickness="1,0,1,0" Background="#FF6E6E6E" />
+    </DataTemplate>
+    <ControlTemplate x:Key="GridRowThemeKey_CellContentPresenterTemplate" TargetType="dxgcore:CellContentPresenter">
+        <Border x:Name="ContentBorder" Background="Transparent" dxg:GridVerticalLinesHelper.VerticalLinesBrush="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}">
+
+            <dxg:GridVerticalLinesHelper.ShowVerticalLines>
+                <Binding Path="ShowVerticalLines" RelativeSource="{RelativeSource TemplatedParent}" />
+            </dxg:GridVerticalLinesHelper.ShowVerticalLines>
+            <dxg:GridVerticalLinesHelper.SelectionState>
+                <Binding Path="SelectionState" />
+            </dxg:GridVerticalLinesHelper.SelectionState>
+
+
+            <Border.BorderThickness>
+                <Binding Path="HasRightSibling" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="0,0,1,0" FalseValue="0" />
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>
+            <Border CornerRadius="2,2,2,2" Margin="2,2,2,2" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}">
+                <!--<Border.BorderThickness>
+                <Binding Path="HasRightSibling" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter TrueValue="0,0,1,0" FalseValue="0"/>
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>-->
+
+                <Border.Background>
+                    <Binding Path="SelectionState" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter>
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="None" Value="{StaticResource GridRowThemeKey_CellBorderNoneBrush}" />
+                                    <dx:EnumObjectProvider x:Key="Selected" Value="{StaticResource GridRowThemeKey_BorderSelectedBrush}" />
+                                    <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_CellBorderFocusedBrush}" />
+                                    <dx:EnumObjectProvider x:Key="FocusedAndSelected" Value="{StaticResource GridRowThemeKey_BorderFocusedBrush}" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.Background>
+
+                <dxgcore:CellEditor x:Name="PART_CellEditor" Column="{Binding Column, RelativeSource={RelativeSource TemplatedParent}}" FieldName="{Binding FieldName, RelativeSource={RelativeSource TemplatedParent}}">
+
+                    <dxgcore:CellEditor.FocusedRowForeground>
+                        <Binding Path="SelectionState">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter DefaultValue="Black">
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_TextFocusedBrush}" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </dxgcore:CellEditor.FocusedRowForeground>
+                    <dxgcore:CellEditor.FocusedCellForeground>
+                        <Binding Path="SelectionState" RelativeSource="{RelativeSource TemplatedParent}">
+                            <Binding.Converter>
+                                <dx:EnumToObjectConverter>
+                                    <dx:EnumToObjectConverter.Values>
+                                        <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource GridRowThemeKey_CellTextFocusedBrush}" />
+                                        <dx:EnumObjectProvider x:Key="FocusedAndSelected" Value="{StaticResource GridRowThemeKey_TextFocusedBrush}" />
+                                    </dx:EnumToObjectConverter.Values>
+                                </dx:EnumToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </dxgcore:CellEditor.FocusedCellForeground>
+                    <dxgcore:CellEditor.Template>
+                        <ControlTemplate TargetType="ContentControl">
+                            <dxe:InplaceEditorContentPresenter />
+                        </ControlTemplate>
+                    </dxgcore:CellEditor.Template>
+
+                </dxgcore:CellEditor>
+            </Border>
+        </Border>
+
+    </ControlTemplate>
+    <DataTemplate x:Key="GridRowThemeKey_FitColumnContentTemplate">
+        <Border Name="fitColumnVerticalLine" Background="Transparent">
+            <Border.BorderBrush>
+                <Binding Path="View.ShowVerticalLines">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter FalseValue="Transparent" TrueValue="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" />
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderBrush>
+            <Border.BorderThickness>
+                <Binding Path="SelectionState">
+                    <Binding.Converter>
+                        <dx:EnumToObjectConverter DefaultValue="1,0,0,0">
+                            <dx:EnumToObjectConverter.Values>
+                                <dx:EnumObjectProvider x:Key="Focused" Value="0" />
+                            </dx:EnumToObjectConverter.Values>
+                        </dx:EnumToObjectConverter>
+                    </Binding.Converter>
+                </Binding>
+            </Border.BorderThickness>
+
+        </Border>
+
+    </DataTemplate>
+    <DataTemplate x:Key="GridRowThemeKey_FixedColumnsDelimiterTemplate">
+        <Border x:Name="border" Background="Transparent" BorderThickness="1,0,1,0" Margin="0,0,0,-1" BorderBrush="White">
+            <Border Background="#FF6E6E6E">
+                <Border.Visibility>
+                    <Binding Path="View.ShowVerticalLines">
+                        <Binding.Converter>
+                            <dx:BoolToVisibilityConverter />
+                        </Binding.Converter>
+                    </Binding>
+                </Border.Visibility>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <ControlTemplate x:Key="TableViewThemeKey_ScrollViewerTemplate">
+        <dxg:ScrollViewerContentDecorator View="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <Grid UseLayoutRounding="true">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <dx:BestFitDecorator x:Name="PART_BestFitControlDecorator" Width="0" Height="0" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                    <dxg:GridControl.CurrentViewChangedListener>
+                        <dxg:BestFitControlDecoratorInitializer />
+                    </dxg:GridControl.CurrentViewChangedListener>
+                </dx:BestFitDecorator>
+                <dxg:GroupPanelControl x:Name="PART_GroupPanel" Grid.Row="0" Template="{StaticResource TableViewThemeKey_GroupPanelContentTemplate}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowGroupPanel, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" dxg:GridPopupMenu.GridMenuType="GroupPanel" dxb:BarManager.DXContextMenu="{Binding Path=(dxg:GridControl.CurrentView).GridMenu, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}" IsGrouped="{Binding Path=(dxg:GridControl.CurrentView).Grid.IsGrouped, RelativeSource={RelativeSource TemplatedParent}}">
+                    <dxg:GridControl.CurrentViewChangedListener>
+                        <dxg:GroupPanelInitializer />
+                    </dxg:GridControl.CurrentViewChangedListener>
+                    <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                        <dxght:GroupPanelTableViewHitTestAcceptor />
+                    </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                </dxg:GroupPanelControl>
+                <dxgcore:AdditionalRowItemsControl Grid.Row="2" Margin="{StaticResource TableViewThemeKey_RowPresenterGridMargin}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                    <dxg:AutoFilterRowControl x:Name="PART_FilterRow" DataContext="{Binding Path=(dxg:GridControl.CurrentView).AutoFilterRowData, RelativeSource={RelativeSource TemplatedParent}}" RowTemplate="{StaticResource GridRowThemeKey_FilterRowTemplate}" ItemTemplate="{StaticResource GridRowThemeKey_AutoFilterRowItemTemplate}" IndicatorWidth="{Binding Path=(dxg:GridControl.CurrentView).IndicatorWidth, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowAutoFilterRow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}" />
+                    <dxg:NewItemRowControl x:Name="PART_NewItemRow" DataContext="{Binding Path=(dxg:GridControl.CurrentView).NewItemRowData, RelativeSource={RelativeSource TemplatedParent}}" RowTemplate="{StaticResource GridRowThemeKey_NewItemRowTemplate}" ItemTemplate="{StaticResource GridRowThemeKey_NewItemRowItemTemplate}" IndicatorWidth="{Binding Path=(dxg:GridControl.CurrentView).IndicatorWidth, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).NewItemRowPosition, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NewItemRowPositionToVisibilityConverter}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}" />
+                </dxgcore:AdditionalRowItemsControl>
+                <Border Width="1" HorizontalAlignment="Left" Grid.Row="2" Background="#FF6E6E6E" />
+                <Grid Margin="{StaticResource TableViewThemeKey_RowPresenterGridMargin}" Grid.Row="3" x:Name="rowPresenterGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowIndicator, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ContentControl Margin="{StaticResource TableViewThemeKey_IndicatorMargin}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowColumnHeaders, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverterInverted}}">
+
+                        </ContentControl>
+                        <ContentControl Grid.Row="1" x:Name="PART_IndicatorPresenter" Width="{Binding Path=(dxg:GridControl.CurrentView).IndicatorWidth, RelativeSource={RelativeSource TemplatedParent}}" Content="{Binding Path=(dxg:GridControl.CurrentView).RootDataItem, RelativeSource={RelativeSource TemplatedParent}}" Template="{StaticResource RowIndicatorThemeKey_RowPanelTemplate}" ContentTemplate="{StaticResource RowIndicatorThemeKey_PresenterTemplate}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowIndicator, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    </Grid>
+                    <Grid Grid.Column="1" Background="#FFFF99">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl Margin="{StaticResource TableViewThemeKey_IndicatorMargin}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowColumnHeaders, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverterInverted}}">
+
+                        </ContentControl>
+                        <ScrollContentPresenter Grid.Row="1" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                            <dxg:FocusRectPresenter.IsVerticalScrollHost>True</dxg:FocusRectPresenter.IsVerticalScrollHost>
+
+                            <ScrollContentPresenter.Name>ScrollContentPresenter</ScrollContentPresenter.Name>
+                            <dxg:GridControl.CurrentViewChangedListener>
+                                <dxg:ScrollContentPresenterInitializer />
+                            </dxg:GridControl.CurrentViewChangedListener>
+
+                            <ScrollContentPresenter.Content>
+                                <dxg:DataPresenter dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                                    <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                        <dxght:DataAreaTableViewHitTestAcceptor />
+                                    </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                </dxg:DataPresenter>
+                            </ScrollContentPresenter.Content>
+                        </ScrollContentPresenter>
+                    </Grid>
+                    <ContentPresenter x:Name="PART_FootersPanel" Grid.Row="2" Grid.ColumnSpan="2" ContentTemplate="{Binding Path=(dxg:GridControl.CurrentView).FooterTemplate, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowTotalSummary, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                            <dxght:TotalSummaryPanelTableViewHitTestAcceptor />
+                        </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                    </ContentPresenter>
+                    <dxg:FilterPanelControl x:Name="PART_FilterPanel" Grid.Row="3" Grid.ColumnSpan="3" DataContext="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}" />
+                    <ScrollBar Grid.Column="2" Grid.RowSpan="1" Value="{Binding VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Maximum="{Binding ScrollableHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" ViewportSize="{Binding ViewportHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Visibility="{Binding ComputedVerticalScrollBarVisibility, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                        <ScrollBar.IsEnabled>
+                            <Binding Path="(dxg:GridControl.CurrentView).HasValidationError" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:NegationConverterExtension />
+                                </Binding.Converter>
+                            </Binding>
+                        </ScrollBar.IsEnabled>
+
+                        <ScrollBar.Name>VerticalScrollBar</ScrollBar.Name>
+
+                        <dxg:GridControl.CurrentViewChangedListener>
+                            <dxg:VerticalScrollBarBlendCustomizationExtension />
+                        </dxg:GridControl.CurrentViewChangedListener>
+                        <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                            <dxght:VerticalScrollBarTableViewHitTestAcceptor />
+                        </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                    </ScrollBar>
+                    <ScrollBar Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="{StaticResource TableViewThemeKey_HorizontalScrollbarMargin}" Value="{Binding HorizontalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Maximum="{Binding ScrollableWidth, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" ViewportSize="{Binding ViewportWidth, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Visibility="{Binding ComputedHorizontalScrollBarVisibility, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+                        <ScrollBar.IsEnabled>
+                            <Binding Path="(dxg:GridControl.CurrentView).HasValidationError" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:NegationConverterExtension />
+                                </Binding.Converter>
+                            </Binding>
+                        </ScrollBar.IsEnabled>
+
+                        <ScrollBar.Name>HorizontalScrollBar</ScrollBar.Name>
+                        <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                            <dxght:HorizontalScrollBarTableViewHitTestAcceptor />
+                        </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                    </ScrollBar>
+                    <Border Grid.Row="1" Grid.Column="2" x:Name="PART_HorizontalScrollCorner" Style="{StaticResource ScrollBarThemeKey_ScrollingCornerStyle}">
+                    </Border>
+                    <Grid Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" IsHitTestVisible="False">
+                        <Path x:Name="LeftBottomCorner" Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 754,628L 754,629C 754,630.657 755.343,632 757,632L 758,632L 758,633L 753,633L 753,628L 754,628 Z " Height="5" Margin="0,0,0,-1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="5" />
+                        <Path x:Name="RightBottomCorner" Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 773,624L 773,625C 773,626.657 771.657,628 770,628L 769,628L 769,629L 774,629L 774,624L 773,624 Z " Height="5" Margin="0,0,0,-1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="5" />
+                    </Grid>
+                    <Border Background="#FF6E6E6E" Width="1" HorizontalAlignment="Left" Grid.RowSpan="2" Grid.Row="0" Margin="0,0,0,3" />
+                    <Border BorderBrush="White" BorderThickness="0,1,0,0" Margin="0,-1,0,0" Grid.Row="1" VerticalAlignment="Top" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowIndicator, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                </Grid>
+                <Grid x:Name="TopRoundCorners" IsHitTestVisible="False" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Top" RenderTransform="1,0,0,-1,0,1" RenderTransformOrigin="0.5,0.5">
+                    <Path x:Name="LeftTopCorner" Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 754,628L 754,629C 754,630.657 755.343,632 757,632L 758,632L 758,633L 753,633L 753,628L 754,628 Z " Height="5" Margin="0,0,0,-1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="5" />
+                    <Path x:Name="RightTopCorner" Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 773,624L 773,625C 773,626.657 771.657,628 770,628L 769,628L 769,629L 774,629L 774,624L 773,624 Z " Height="5" Margin="0,0,0,-1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="5" />
+                </Grid>
+                <Border Background="#FF6E6E6E" Height="1" Margin="3,0,3,0" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Top" />
+                <Border Background="#FF6E6E6E" Width="1" HorizontalAlignment="Right" Grid.RowSpan="3" Grid.Row="1" />
+                <Border BorderBrush="#FF6E6E6E" BorderThickness="1,0,1,1" Height="3" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Bottom">
+                    <!--<Border.CornerRadius>
+                    <Binding Path="(dxg:GridBorderHelper.ShowBorder)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter FalseValue="0" TrueValue="0,0,3,3"/>
+                        </Binding.Converter>
+                    </Binding>
+                </Border.CornerRadius>-->
+                </Border>
+                <ContentPresenter Name="PART_HeadersPanel" Grid.Row="1" ContentTemplate="{Binding Path=(dxg:GridControl.CurrentView).HeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(dxg:GridControl.CurrentView).ShowColumnHeaders, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                    <dxg:GridControl.CurrentViewChangedListener>
+                        <dxg:HeadersPanelInitializer />
+                    </dxg:GridControl.CurrentViewChangedListener>
+                    <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                        <dxght:ColumnHeaderPanelTableViewHitTestAcceptor />
+                    </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                </ContentPresenter>
+
+                <dxg:OuterBorderElement Grid.Row="2" Grid.RowSpan="2" x:Name="outerBorder" ShowColumnHeaders="{Binding Path=(dxg:GridControl.CurrentView).ShowColumnHeaders, RelativeSource={RelativeSource TemplatedParent}}" />
+                <dxg:FocusRectPresenter x:Name="PART_FocusRectPresenter" Grid.RowSpan="4" View="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </Grid>
+        </dxg:ScrollViewerContentDecorator>
+    </ControlTemplate>
+
+    <!--END Include: \LightGray\GridView.xaml -->
+    <!--START Include: \Generic\ColumnHeader.xaml -->
+    <dx:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
+
+    <DataTemplate x:Key="GridColumnHeaderThemeKey_ContentTemplate">
+        <ContentPresenter Name="textBlock" Content="{Binding}" Style="{Binding Path=(dxg:GridColumnHeader.GridColumn).ActualColumnHeaderContentStyle, RelativeSource={RelativeSource TemplatedParent}}" />
+    </DataTemplate>
+    <DataTemplate x:Key="GridColumnHeaderThemeKey_CustomizationAreaTemplate">
+    </DataTemplate>
+    <Style x:Key="GridColumnHeaderThemeKey_ContentStyle" TargetType="ContentPresenter">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="GridColumnHeaderThemeKey_ResizerStyle" TargetType="dx:DXThumb">
+
+
+        <Setter Property="MinWidth" Value="8" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dx:DXThumb">
+                    <Grid Background="Transparent" dx:DragManager.IsStartDragPlace="False" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:ColumnEdgeTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="GridColumnHeaderThemeKey_ColumnChooserTemplate">
+        <Grid dx:DragManager.IsStartDragPlace="false">
+            <ContentControl Style="{StaticResource GridColumnHeaderThemeKey_ContentBorderStyle}" dxg:GridColumn.HeaderPresenterType="{Binding Path=(dxg:GridColumn.HeaderPresenterType), RelativeSource={RelativeSource TemplatedParent}}">
+                <Button dx:DragManager.IsStartDragPlace="true" Name="PART_ColumnHeaderButton" dxg:GridColumnHeader.GridColumn="{Binding Path=(dxg:GridColumnHeader.GridColumn), RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumn.HeaderPresenterType="{Binding Path=(dxg:GridColumn.HeaderPresenterType), RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource GridColumnHeaderThemeKey_ButtonStyle}" />
+            </ContentControl>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridColumnHeaderThemeKey_FilterAreaTemplate" TargetType="dxe:PopupBaseEdit">
+        <ToggleButton Template="{StaticResource GridColumnHeaderThemeKey_ColumnFilterTemplate}" IsChecked="{Binding Path=IsPopupOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{Binding Path=Parent.Foreground, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumn.ColumnPosition="{Binding Path=(dxg:GridColumn.ColumnPosition), RelativeSource={RelativeSource TemplatedParent}}" />
+    </ControlTemplate>
+    <Style x:Key="GridColumnHeaderThemeKey_HeaderCustomizationAreaStyle" TargetType="ContentPresenter">
+    </Style>
+    <Style x:Key="GridColumnHeaderThemeKey_ContentBorderStyle" TargetType="ContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border x:Name="outerBorder">
+                            <Border.Visibility>
+                                <Binding Path="(dxg:GridColumn.HeaderPresenterType)" RelativeSource="{RelativeSource TemplatedParent}" ConverterParameter="GroupPanel">
+                                    <Binding.Converter>
+                                        <dx:EnumToVisibilityConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </Border.Visibility>
+                            <Border.Margin>
+                                <Binding Path="(dxg:GridColumn.GroupIndex)">
+                                    <Binding.Converter>
+                                        <dxg:GroupPanelPaddingConverter Offset="5" />
+                                    </Binding.Converter>
+                                </Binding>
+                            </Border.Margin>
+                        </Border>
+                        <Border x:Name="border0" Grid.Row="1">
+                            <Border.Padding>
+                                <Binding Path="(dxg:GridColumn.HeaderPresenterType)" RelativeSource="{RelativeSource TemplatedParent}">
+                                    <Binding.Converter>
+                                        <dx:EnumToObjectConverter DefaultValue="0">
+                                            <dx:EnumToObjectConverter.Values>
+                                                <Thickness x:Key="GroupPanel">2,0,2,0</Thickness>
+                                            </dx:EnumToObjectConverter.Values>
+                                        </dx:EnumToObjectConverter>
+                                    </Binding.Converter>
+                                </Binding>
+                            </Border.Padding>
+                            <Border.VerticalAlignment>
+                                <Binding Path="(dxg:GridColumn.HeaderPresenterType)" RelativeSource="{RelativeSource TemplatedParent}">
+                                    <Binding.Converter>
+                                        <dx:EnumToObjectConverter DefaultValue="Stretch">
+                                            <dx:EnumToObjectConverter.Values>
+                                                <VerticalAlignment x:Key="GroupPanel">Top</VerticalAlignment>
+                                            </dx:EnumToObjectConverter.Values>
+                                        </dx:EnumToObjectConverter>
+                                    </Binding.Converter>
+                                </Binding>
+                            </Border.VerticalAlignment>
+                            <ContentPresenter />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="GridColumnHeaderThemeKey_ControlTemplate">
+        <Grid dx:DragManager.IsStartDragPlace="false">
+            <Grid Name="dropPlaceGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Name="PART_BorderPrevious" Background="Transparent" dxg:GridColumn.DropPlace="Previous" />
+                <Border Name="PART_BorderNext" Background="Transparent" dxg:GridColumn.DropPlace="Next" />
+            </Grid>
+            <Grid>
+                <ContentControl Style="{StaticResource GridColumnHeaderThemeKey_ContentBorderStyle}" dxg:GridColumn.HeaderPresenterType="{Binding Path=(dxg:GridColumn.HeaderPresenterType), RelativeSource={RelativeSource TemplatedParent}}">
+                    <Button dxg:GridColumnHeader.GridColumn="{Binding Path=(dxg:GridColumnHeader.GridColumn), RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumn.HeaderPresenterType="{Binding Path=(dxg:GridColumn.HeaderPresenterType), RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumnHeader.ColumnFilterPopup="{Binding Path=(dxg:GridColumnHeader.ColumnFilterPopup), RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumnHeader.IsFilterButtonVisible="{Binding Path=(dxg:GridColumnHeader.IsFilterButtonVisible), RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumnHeader.ActualShowFilterButton="{Binding Path=(dxg:GridColumnHeader.ActualShowFilterButton), RelativeSource={RelativeSource TemplatedParent}}" dx:DragManager.IsStartDragPlace="true" Name="PART_ColumnHeaderButton" Command="{Binding Path=(dxg:GridColumnHeader.GridColumn).Commands.ChangeColumnSortOrder, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumn.ColumnPosition="{Binding Path=(dxg:GridColumn.ColumnPosition), RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource GridColumnHeaderThemeKey_ButtonStyle}">
+                        <ToolTipService.ToolTip>
+                            <dxg:ToolTipWithSwitchedVisibility VisibilityWithCollapsedDefault="{Binding Path=(dxg:GridColumnHeader.GridColumn).HeaderToolTip, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ObjectToVisibilityConverter}}" ContentTemplate="{Binding Path=(dxg:GridColumnHeader.GridColumn).ActualHeaderToolTipTemplate, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Binding Path="(dxg:GridColumnHeader.GridColumn).HeaderToolTip" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </dxg:ToolTipWithSwitchedVisibility>
+                        </ToolTipService.ToolTip>
+                    </Button>
+                </ContentControl>
+                <dx:DXThumb Name="PART_HeaderGripper" HorizontalAlignment="Right" Style="{StaticResource GridColumnHeaderThemeKey_ResizerStyle}" Cursor="SizeWE" Visibility="Collapsed" />
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="GridColumnHeaderThemeKey_ButtonStyle" TargetType="Button">
+        <Setter Property="Button.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <dxg:ColumnHeaderContentControl Template="{StaticResource GridColumnHeaderThemeKey_ButtonContentTemplate}" dxg:GridColumn.ColumnPosition="{Binding Path=(dxg:GridColumn.ColumnPosition), RelativeSource={RelativeSource TemplatedParent}}" IsPressed="{Binding IsPressed, RelativeSource={RelativeSource TemplatedParent}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ContentControl x:Name="HeaderContentControl">
+
+
+                                    <ContentControl.Foreground>
+                                        <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                            <Binding.Converter>
+                                                <dx:EnumToObjectConverter DefaultValue="{StaticResource GridColumnHeaderThemeKey_HeaderCaptionForeground}">
+                                                    <dx:EnumToObjectConverter.Values>
+                                                        <dx:EnumObjectProvider x:Key="Standalone" Value="{StaticResource GridColumnHeaderThemeKey_GroupHeaderCaptionForeground}" />
+                                                    </dx:EnumToObjectConverter.Values>
+                                                </dx:EnumToObjectConverter>
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </ContentControl.Foreground>
+
+                                    <dxg:ColumnHeaderContentPresenter HeaderPresenterType="{Binding Path=(dxg:GridColumn.HeaderPresenterType), RelativeSource={RelativeSource TemplatedParent}}" ContentTemplateSelector="{Binding Path=(dxg:GridColumnHeader.GridColumn).ActualHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="0" x:Name="HeaderContent" HorizontalAlignment="Left" dxg:GridColumnHeader.GridColumn="{Binding Path=(dxg:GridColumnHeader.GridColumn), RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />
+                                </ContentControl>
+                                <dxgcore:ColumnHeaderFilterControl x:Name="PART_ColumnFilter" dxg:GridColumn.ColumnPosition="{Binding Path=(dxg:GridColumn.ColumnPosition), RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="1" VerticalAlignment="Top" ColumnFilterPopup="{Binding Path=(dxg:GridColumnHeader.ColumnFilterPopup), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+
+
+                                    <dxgcore:ColumnHeaderFilterControl.Foreground>
+                                        <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                            <Binding.Converter>
+                                                <dx:EnumToObjectConverter DefaultValue="{StaticResource GridColumnHeaderThemeKey_HeaderCaptionForeground}">
+                                                    <dx:EnumToObjectConverter.Values>
+                                                        <dx:EnumObjectProvider x:Key="Standalone" Value="{StaticResource GridColumnHeaderThemeKey_GroupHeaderCaptionForeground}" />
+                                                    </dx:EnumToObjectConverter.Values>
+                                                </dx:EnumToObjectConverter>
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </dxgcore:ColumnHeaderFilterControl.Foreground>
+
+                                    <dxgcore:ColumnHeaderFilterControl.Opacity>
+                                        <Binding Path="(dxg:GridColumnHeader.IsFilterButtonVisible)" RelativeSource="{RelativeSource TemplatedParent}">
+                                            <Binding.Converter>
+                                                <dx:BoolToObjectConverter FalseValue="0" TrueValue="1" />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </dxgcore:ColumnHeaderFilterControl.Opacity>
+                                    <dxgcore:ColumnHeaderFilterControl.Visibility>
+                                        <Binding Path="(dxg:GridColumnHeader.ActualShowFilterButton)" RelativeSource="{RelativeSource TemplatedParent}">
+                                            <Binding.Converter>
+                                                <dx:BooleanToVisibilityConverter />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </dxgcore:ColumnHeaderFilterControl.Visibility>
+                                    <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                        <Binding Path="(dxg:GridColumn.HeaderPresenterType)" RelativeSource="{RelativeSource TemplatedParent}">
+                                            <Binding.Converter>
+                                                <dx:EnumToObjectConverter>
+                                                    <dx:EnumToObjectConverter.DefaultValue>
+                                                        <dxght:ColumnHeaderFilterButtonTableViewHitTestAcceptor />
+                                                    </dx:EnumToObjectConverter.DefaultValue>
+                                                    <dx:EnumToObjectConverter.Values>
+                                                        <dxght:GroupPanelColumnHeaderFilterButtonTableViewHitTestAcceptor x:Key="GroupPanel" />
+                                                    </dx:EnumToObjectConverter.Values>
+                                                </dx:EnumToObjectConverter>
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                </dxgcore:ColumnHeaderFilterControl>
+                            </Grid>
+                            <Border x:Name="CaptionToArrowIndent" Grid.Column="2" Style="{StaticResource GridColumnHeaderThemeKey_CaptionToArrowIndentBorderStyle}" Visibility="Collapsed" />
+                            <dx:XPFContentPresenter x:Name="HeaderCustomizationArea" Content="{Binding Path=(dxg:GridColumnHeader.GridColumn), RelativeSource={RelativeSource TemplatedParent}}" ContentTemplateSelector="{Binding Path=(dxg:GridColumnHeader.GridColumn).ActualHeaderCustomizationAreaTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumnHeader.GridColumn="{Binding Path=(dxg:GridColumnHeader.GridColumn), RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="1" Style="{StaticResource GridColumnHeaderThemeKey_HeaderCustomizationAreaStyle}">
+                                <dx:XPFContentPresenter.Visibility>
+                                    <Binding Path="(dxg:GridColumn.HeaderPresenterType)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:EnumToObjectConverter DefaultValue="Visible">
+                                                <dx:EnumToObjectConverter.Values>
+                                                    <Visibility x:Key="ColumnChooser">Collapsed</Visibility>
+                                                </dx:EnumToObjectConverter.Values>
+                                            </dx:EnumToObjectConverter>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </dx:XPFContentPresenter.Visibility>
+                            </dx:XPFContentPresenter>
+                            <dxgcore:ColumnHeaderSortIndicatorControl x:Name="SortUp" Grid.Column="2" Style="{StaticResource GridColumnHeaderThemeKey_SortArrowUpStyle}" Template="{StaticResource GridColumnHeaderThemeKey_SortArrowUpTemplate}" Visibility="{Binding SortOrder, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Ascending, FallbackValue=Collapsed}">
+
+
+                                <dxgcore:ColumnHeaderSortIndicatorControl.Foreground>
+                                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:EnumToObjectConverter DefaultValue="{StaticResource GridColumnHeaderThemeKey_HeaderCaptionForeground}">
+                                                <dx:EnumToObjectConverter.Values>
+                                                    <dx:EnumObjectProvider x:Key="Standalone" Value="{StaticResource GridColumnHeaderThemeKey_GroupHeaderCaptionForeground}" />
+                                                </dx:EnumToObjectConverter.Values>
+                                            </dx:EnumToObjectConverter>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </dxgcore:ColumnHeaderSortIndicatorControl.Foreground>
+
+                            </dxgcore:ColumnHeaderSortIndicatorControl>
+
+                            <dxgcore:ColumnHeaderSortIndicatorControl x:Name="SortDown" Grid.Column="2" Style="{StaticResource GridColumnHeaderThemeKey_SortArrowDownStyle}" Template="{StaticResource GridColumnHeaderThemeKey_SortArrowDownTemplate}" Visibility="{Binding SortOrder, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Descending, FallbackValue=Collapsed}">
+
+
+                                <dxgcore:ColumnHeaderSortIndicatorControl.Foreground>
+                                    <Binding Path="(dxg:GridColumn.ColumnPosition)" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:EnumToObjectConverter DefaultValue="{StaticResource GridColumnHeaderThemeKey_HeaderCaptionForeground}">
+                                                <dx:EnumToObjectConverter.Values>
+                                                    <dx:EnumObjectProvider x:Key="Standalone" Value="{StaticResource GridColumnHeaderThemeKey_GroupHeaderCaptionForeground}" />
+                                                </dx:EnumToObjectConverter.Values>
+                                            </dx:EnumToObjectConverter>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </dxgcore:ColumnHeaderSortIndicatorControl.Foreground>
+
+                            </dxgcore:ColumnHeaderSortIndicatorControl>
+                        </Grid>
+                    </dxg:ColumnHeaderContentControl>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--END Include: \Generic\ColumnHeader.xaml -->
+    <!--START Include: \Generic\RowIndicator.xaml -->
+
+    <dx:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+    <ControlTemplate x:Key="RowIndicatorThemeKey_ItemsControlItemPanelTemplate">
+        <dx:StackVisibleIndexPanel Orientation="Vertical" ArrangeAccordingToVisibleIndex="True" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RowIndicatorThemeKey_ItemTemplate">
+        <ContentPresenter x:Name="PART_Indicator" Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(dxg:RowIndicatorViewInfo.ActualRowIndicatorHeight)}" ContentTemplate="{StaticResource RowIndicatorThemeKey_RowTemplate}" dxg:GridViewBase.RowHandle="{Binding Path=RowHandle}" dxg:GridPopupMenu.GridMenuType="RowCell" dxb:BarManager.DXContextMenu="{Binding Path=(dxg:GridControl.ActiveView).GridMenu, RelativeSource={RelativeSource TemplatedParent}}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RowIndicatorThemeKey_GroupPresenterTemplate">
+        <ContentControl Template="{StaticResource RowIndicatorThemeKey_GroupBorderTemplate}">
+            <StackPanel>
+                <ContentPresenter x:Name="PART_Indicator" Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(dxg:RowIndicatorViewInfo.ActualRowIndicatorHeight)}" ContentTemplate="{StaticResource RowIndicatorThemeKey_GroupRowTemplate}" dxg:GridViewBase.RowHandle="{Binding Path=RowHandle}" Visibility="{Binding IsGroupRowVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <dx:DXExpander AnimationProgress="{Binding Path=(dxg:RowIndicatorViewInfo.AnimationProgress)}" Style="{StaticResource GroupRowThemeKey_GroupRowControlExpanderStyle}" Margin="0" dx:FrameworkElementHelper.IsClipped="True">
+                    <ContentControl Template="{StaticResource RowIndicatorThemeKey_GroupItemsControlTemplate}">
+                        <dx:CachedItemsControl ItemsSource="{Binding Path=RowsContainer.Items}" ItemsPanel="{StaticResource RowIndicatorThemeKey_ItemsControlItemPanelTemplate}" dx:ExpandHelper.VisibleSize="{Binding Path=(dxg:RowIndicatorViewInfo.VisibleSize)}" ItemTemplate="{Binding ItemsControlItemTemplate, RelativeSource={RelativeSource TemplatedParent}}">
+                        </dx:CachedItemsControl>
+                    </ContentControl>
+                </dx:DXExpander>
+            </StackPanel>
+        </ContentControl>
+    </ControlTemplate>
+
+    <DataTemplate x:Key="RowIndicatorThemeKey_ItemsControlItemTemplate">
+        <dxg:RowIndicatorControl RowData="{Binding}" RowTemplate="{StaticResource RowIndicatorThemeKey_ItemTemplate}" GroupRowTemplate="{StaticResource RowIndicatorThemeKey_GroupPresenterTemplate}" ItemsControlItemTemplate="{Binding ContentTemplate, RelativeSource={RelativeSource TemplatedParent}}">
+
+            <dxgcore:RowData.CurrentRowData>
+                <Binding />
+            </dxgcore:RowData.CurrentRowData>
+
+            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                <dxght:RowIndicatorTableViewHitTestAcceptor />
+            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+        </dxg:RowIndicatorControl>
+    </DataTemplate>
+    <DataTemplate x:Key="RowIndicatorThemeKey_IconPresenterTemplate">
+        <Border x:Name="errorIndicatorBorder" Background="Transparent">
+
+            <Border.Resources>
+                <dx:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
+            </Border.Resources>
+            <ToolTipService.ToolTip>
+                <ToolTip Visibility="{Binding Path=(dxe:BaseEdit.HasValidationError), Converter={StaticResource BoolToVisibilityConverter}}">
+                    <dx:DXDockPanel>
+                        <dxe:ErrorControl Content="{Binding Path=(dxe:BaseEdit.ValidationError)}" />
+                        <ContentPresenter VerticalAlignment="Center" Content="{Binding Path=(dxe:BaseEdit.ValidationError).ErrorContent}" />
+                    </dx:DXDockPanel>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+
+            <ContentPresenter x:Name="iconPresenter" Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}">
+
+                <ContentPresenter.ContentTemplate>
+                    <Binding Path="IndicatorState">
+                        <Binding.Converter>
+                            <dx:EnumToObjectConverter>
+                                <dx:EnumToObjectConverter.Values>
+                                    <dx:EnumObjectProvider x:Key="None">
+                                        <dx:EnumObjectProvider.Value>
+                                            <DataTemplate>
+                                                <Grid />
+                                            </DataTemplate>
+                                        </dx:EnumObjectProvider.Value>
+                                    </dx:EnumObjectProvider>
+                                    <dx:EnumObjectProvider x:Key="Focused" Value="{StaticResource RowIndicatorThemeKey_FocusedIconTemplate}" />
+                                    <dx:EnumObjectProvider x:Key="Changed" Value="{StaticResource RowIndicatorThemeKey_ChangedIconTemplate}" />
+                                    <dx:EnumObjectProvider x:Key="NewItemRow" Value="{StaticResource RowIndicatorThemeKey_NewItemRowIconTemplate}" />
+                                    <dx:EnumObjectProvider x:Key="Editing" Value="{StaticResource RowIndicatorThemeKey_EditingIconTemplate}" />
+                                    <dx:EnumObjectProvider x:Key="Error" Value="{StaticResource RowIndicatorThemeKey_ErrorIconTemplate}" />
+                                    <dx:EnumObjectProvider x:Key="FocusedError" Value="{StaticResource RowIndicatorThemeKey_FocusedErrorIconTemplate}" />
+                                    <dx:EnumObjectProvider x:Key="AutoFilterRow" Value="{StaticResource RowIndicatorThemeKey_AutoFilterRowIconTemplate}" />
+                                </dx:EnumToObjectConverter.Values>
+                            </dx:EnumToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </ContentPresenter.ContentTemplate>
+
+            </ContentPresenter>
+        </Border>
+
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="RowIndicatorThemeKey_PresenterTemplate">
+        <dx:CachedItemsControl ItemsSource="{Binding Path=Items}" ItemTemplate="{StaticResource RowIndicatorThemeKey_ItemsControlItemTemplate}" ItemsPanel="{StaticResource RowIndicatorThemeKey_ItemsControlItemPanelTemplate}" />
+    </DataTemplate>
+    <!--END Include: \Generic\RowIndicator.xaml -->
+    <!--START Include: \Generic\RowsControl.xaml -->
+    <ControlTemplate x:Key="GroupRowThemeKey_GroupRowsControlContainerTemplate" TargetType="ContentControl">
+        <ContentPresenter />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="GroupRowThemeKey_GroupRowsControlTemplate">
+        <ContentControl Template="{StaticResource GroupRowThemeKey_GroupRowsControlContainerTemplate}">
+            <dxg:RowsItemsControl ItemsSource="{Binding Path=Items}">
+                <dxg:RowsItemsControl.ItemsPanel>
+                    <ControlTemplate>
+                        <dx:StackVisibleIndexPanel Orientation="Vertical" ArrangeAccordingToVisibleIndex="True" />
+                    </ControlTemplate>
+                </dxg:RowsItemsControl.ItemsPanel>
+            </dxg:RowsItemsControl>
+        </ContentControl>
+    </ControlTemplate>
+
+    <!--END Include: \Generic\RowsControl.xaml -->
+    <!--START Include: \Generic\Rows.xaml -->
+    <ControlTemplate x:Key="TableViewThemeKey_FixedNoneHeadersPanelTemplate">
+        <dx:StackVisibleIndexPanel dxg:GridColumn.HeaderPresenterType="Headers" ArrangeAccordingToVisibleIndex="True" Name="headersPanel" Orientation="Horizontal">
+            <dx:DragManager.DropTargetFactory>
+                <dxgcore:FixedNoneColumnHeaderDropTargetFactoryExtension />
+            </dx:DragManager.DropTargetFactory>
+        </dx:StackVisibleIndexPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="TableViewThemeKey_FixedNoneDropPanelTemplate">
+        <dx:StackVisibleIndexPanel ArrangeAccordingToVisibleIndex="True" Orientation="Horizontal" />
+    </ControlTemplate>
+    <ControlTemplate x:Key="TableViewThemeKey_FixedLeftHeadersPanelTemplate">
+        <dx:StackVisibleIndexPanel dxg:GridColumn.HeaderPresenterType="Headers" ArrangeAccordingToVisibleIndex="True" Name="fixedLeftHeadersPanel" Orientation="Horizontal">
+            <dx:DragManager.DropTargetFactory>
+                <dxgcore:FixedLeftColumnHeaderDropTargetFactoryExtension />
+            </dx:DragManager.DropTargetFactory>
+        </dx:StackVisibleIndexPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="TableViewThemeKey_FixedLeftNoneDropPanelTemplate">
+        <dx:StackVisibleIndexPanel ArrangeAccordingToVisibleIndex="True" Orientation="Horizontal" />
+    </ControlTemplate>
+    <ControlTemplate x:Key="TableViewThemeKey_FixedRightHeadersPanelTemplate">
+        <dx:StackVisibleIndexPanel dxg:GridColumn.HeaderPresenterType="Headers" ArrangeAccordingToVisibleIndex="True" Name="fixedRightHeadersPanel" Orientation="Horizontal">
+            <dx:DragManager.DropTargetFactory>
+                <dxgcore:FixedRightColumnHeaderDropTargetFactoryExtension />
+            </dx:DragManager.DropTargetFactory>
+        </dx:StackVisibleIndexPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="TableViewThemeKey_FixedRightNoneDropPanelTemplate">
+        <dx:StackVisibleIndexPanel ArrangeAccordingToVisibleIndex="True" Orientation="Horizontal" />
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridRowThemeKey_RowDecorationTemplate" TargetType="ContentControl">
+        <ContentPresenter />
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridRowThemeKey_RowControlTemplate">
+        <ContentControl Template="{Binding Path=(dxgcore:RowData.CurrentRowData).View.RowDecorationTemplate, RelativeSource={RelativeSource TemplatedParent}}">
+            <dxg:GridRowContent x:Name="content" Style="{Binding Path=(dxgcore:RowData.CurrentRowData).View.RowStyle, RelativeSource={RelativeSource TemplatedParent}}" MinHeight="{Binding Path=(dxgcore:RowData.CurrentRowData).View.RowMinHeight, RelativeSource={RelativeSource TemplatedParent}}" dxg:RowIndicatorViewInfo.ActualRowIndicatorHeight="{Binding CurrentHeight, RelativeSource={RelativeSource Self}, Mode=OneWay}">
+                <ToolTipService.ToolTip>
+                    <Binding Path="(dxgcore:RowData.CurrentRowData).(dxe:BaseEdit.HasValidationError)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter FalseValue="{x:Null}">
+                                <dx:BoolToObjectConverter.TrueValue>
+                                    <ToolTip Name="toolTip" Content="{Binding Path=(dxgcore:RowData.CurrentRowData).(dxe:BaseEdit.ValidationError), RelativeSource={RelativeSource TemplatedParent}}">
+                                        <ToolTip.ContentTemplate>
+                                            <DataTemplate>
+                                                <dx:DXDockPanel LastChildFill="True">
+                                                    <dxe:ErrorControl Content="{Binding}" />
+                                                    <ContentPresenter VerticalAlignment="Center" Content="{Binding Path=ErrorContent}" />
+                                                </dx:DXDockPanel>
+                                            </DataTemplate>
+                                        </ToolTip.ContentTemplate>
+                                    </ToolTip>
+                                </dx:BoolToObjectConverter.TrueValue>
+                            </dx:BoolToObjectConverter>
+                        </Binding.Converter>
+                    </Binding>
+                </ToolTipService.ToolTip>
+                <dx:DataContentPresenter Content="{Binding}" ContentTemplateSelector="{Binding Path=(dxgcore:RowData.CurrentRowData).View.ActualDataRowTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}" />
+            </dxg:GridRowContent>
+        </ContentControl>
+    </ControlTemplate>
+
+    <DataTemplate x:Key="GridRowThemeKey_DataRowTemplate">
+        <dxg:GridScrollablePart x:Name="ScrollablePart" FixedColumnsDelimiterTemplate="{StaticResource GridRowThemeKey_FixedColumnsDelimiterTemplate}" ScrollingMargin="{Binding Path=DataContext.View.ScrollingVirtualizationMargin, RelativeSource={RelativeSource TemplatedParent}}" FitContentWidth="{Binding Path=DataContext.View.FitColumnWidth, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridControl.CurrentView="{Binding Path=DataContext.View, RelativeSource={RelativeSource TemplatedParent}}">
+            <dxg:GridScrollablePart.FitContent>
+                <ContentPresenter Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{StaticResource GridRowThemeKey_FitColumnContentTemplate}" dxg:GridPopupMenu.GridMenuType="RowCell" dxb:BarManager.DXContextMenu="{Binding Path=DataContext.View.GridMenu, RelativeSource={RelativeSource TemplatedParent}}" />
+            </dxg:GridScrollablePart.FitContent>
+            <dxg:GridScrollablePart.FixedLeftContent>
+                <dxg:CellItemsControl dxg:GridControl.CurrentView="{Binding View}" ItemsSource="{Binding Path=DataContext.FixedLeftCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedLeftNoneDropPanelTemplate}">
+                </dxg:CellItemsControl>
+            </dxg:GridScrollablePart.FixedLeftContent>
+            <dxg:GridScrollablePart.FixedRightContent>
+                <dxg:CellItemsControl dxg:GridControl.CurrentView="{Binding View}" ItemsSource="{Binding Path=DataContext.FixedRightCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedRightNoneDropPanelTemplate}">
+                </dxg:CellItemsControl>
+            </dxg:GridScrollablePart.FixedRightContent>
+            <dxg:GridScrollablePart.FixedNoneContent>
+                <dxg:CellItemsControl dxg:GridControl.CurrentView="{Binding View}" ItemsSource="{Binding Path=DataContext.FixedNoneCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedNoneDropPanelTemplate}">
+                </dxg:CellItemsControl>
+            </dxg:GridScrollablePart.FixedNoneContent>
+        </dxg:GridScrollablePart>
+    </DataTemplate>
+    <ControlTemplate x:Key="GroupRowThemeKey_GroupRowControlTemplate">
+        <Grid x:Name="group">
+            <ContentControl Template="{StaticResource GroupRowThemeKey_GroupRowControlContainerTemplate}">
+                <dx:DXDockPanel>
+                    <ContentControl dx:DXDockPanel.Dock="Top" Template="{StaticResource GroupRowThemeKey_GroupRowControlHeaderContentTemplate}">
+                        <dx:DoubleClicker CommandParameter="{Binding RowHandle.Value}" Command="{Binding View.Commands.ChangeGroupExpanded}" HorizontalContentAlignment="Stretch">
+                            <dxg:GroupGridRowPresenter x:Name="PART_HeaderContentPresenter" dx:ExpandHelper.IsExpanded="{Binding IsExpanded}" dx:ExpandHelper.ExpandSpeed="{Binding Path=View.(dx:ExpandHelper.ExpandSpeed)}" ContentTemplateSelector="{Binding Path=View.ActualGroupRowTemplateSelector}" Content="{Binding}" Style="{StaticResource GroupRowThemeKey_GroupRowPresenterStyle}" />
+                        </dx:DoubleClicker>
+                    </ContentControl>
+                    <dx:DXExpander AllowAddingEvent="True" dx:DXDockPanel.Dock="Top" dxg:RowIndicatorViewInfo.AnimationProgress="{Binding Path=AnimationProgress, RelativeSource={RelativeSource Self}, Mode=OneWay}" Name="Expander" Style="{StaticResource GroupRowThemeKey_GroupRowControlExpanderStyle}" dx:FrameworkElementHelper.IsClipped="True">
+                        <!--<dx:DXExpander.AnimationProgress>
+                            <Binding Path="IsExpanded">
+                                <Binding.Converter>
+                                    <dx:BoolToObjectConverter TrueValue="1" FalseValue="0"/>
+                                </Binding.Converter>
+                             </Binding>
+                        </dx:DXExpander.AnimationProgress>-->
+                        <dxg:GridItemsContainer x:Name="PART_ItemsContainer" dxg:RowIndicatorViewInfo.VisibleSize="{Binding Path=(dx:ExpandHelper.VisibleSize), RelativeSource={RelativeSource Self}, Mode=OneWay}" HorizontalAlignment="Stretch" Content="{Binding Path=RowsContainer}" />
+                    </dx:DXExpander>
+                </dx:DXDockPanel>
+            </ContentControl>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="GridRowThemeKey_CellStyle" TargetType="dxgcore:CellContentPresenter">
+        <Setter Property="Background" Value="{StaticResource GridRowThemeKey_CellBorderNoneBrush}" />
+
+    </Style>
+    <!--END Include: \Generic\Rows.xaml -->
+    <!--START Include: \Generic\GridView.xaml -->
+
+
+
+    <Style TargetType="dxg:OuterBorderElement">
+        <Setter Property="Template" Value="{StaticResource TableViewThemeKey_OuterBorderElementTemplate}" />
+    </Style>
+    <DataTemplate x:Key="TableViewThemeKey_GridColumnHeaderContainerTemplate">
+        <dxg:GridColumnHeader dxg:GridColumn.HeaderPresenterType="Headers" dxg:GridColumnHeader.GridColumn="{Binding}" DataContext="{Binding Path=DataContext.Column, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=ActualHeaderWidth}" dxg:GridColumn.ColumnPosition="{Binding Path=(dxg:GridColumn.ColumnPosition)}" dxg:GridColumn.VisibleIndex="{Binding Path=(dxg:GridColumn.VisibleIndex)}" dxg:GridPopupMenu.GridMenuType="Column" dxb:BarManager.DXContextMenu="{Binding Path=DataContext.View.GridMenu, RelativeSource={RelativeSource TemplatedParent}}">
+            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                <dxght:ColumnHeaderTableViewHitTestAcceptor />
+            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+        </dxg:GridColumnHeader>
+    </DataTemplate>
+    <DataTemplate x:Key="TableViewThemeKey_HeadersTemplate">
+        <dx:MeasurePixelSnapper>
+            <Grid>
+                <dxg:GridScrollablePart FixedColumnsDelimiterTemplate="{StaticResource GridColumnHeaderThemeKey_FixedColumnsDelimiterTemplate}" ScrollingMargin="{Binding Path=(dxg:GridControl.CurrentView).ScrollingHeaderVirtualizationMargin, RelativeSource={RelativeSource TemplatedParent}}" FitContentWidth="{Binding Path=(dxg:GridControl.CurrentView).HeaderFitColumnWidth, RelativeSource={RelativeSource TemplatedParent}}" IndicatorWidth="{Binding Path=(dxg:GridControl.CurrentView).IndicatorHeaderWidth, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                    <dxg:GridScrollablePart.FitContent>
+                        <ContentPresenter Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{StaticResource GridColumnHeaderThemeKey_FitColumnContentTemplate}" />
+                    </dxg:GridScrollablePart.FitContent>
+                    <dxg:GridScrollablePart.IndicatorContent>
+                        <dxg:IndicatorColumnHeader dxg:GridColumn.ColumnPosition="Left">
+                            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                <dxght:ColumnButtonTableViewHitTestAcceptor />
+                            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                        </dxg:IndicatorColumnHeader>
+                    </dxg:GridScrollablePart.IndicatorContent>
+                    <dxg:GridScrollablePart.FixedLeftContent>
+                        <dxg:HeaderItemsControl ItemTemplate="{StaticResource TableViewThemeKey_GridColumnHeaderContainerTemplate}" dxg:GridColumn.HeaderPresenterType="Headers" ItemsSource="{Binding Path=(dxg:GridControl.CurrentView).HeadersData.FixedLeftCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedLeftHeadersPanelTemplate}">
+                        </dxg:HeaderItemsControl>
+                    </dxg:GridScrollablePart.FixedLeftContent>
+                    <dxg:GridScrollablePart.FixedRightContent>
+                        <dxg:HeaderItemsControl ItemTemplate="{StaticResource TableViewThemeKey_GridColumnHeaderContainerTemplate}" dxg:GridColumn.HeaderPresenterType="Headers" ItemsSource="{Binding Path=(dxg:GridControl.CurrentView).HeadersData.FixedRightCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedRightHeadersPanelTemplate}">
+                        </dxg:HeaderItemsControl>
+                    </dxg:GridScrollablePart.FixedRightContent>
+                    <dxg:GridScrollablePart.FixedNoneContent>
+                        <dxg:HeaderItemsControl ItemTemplate="{StaticResource TableViewThemeKey_GridColumnHeaderContainerTemplate}" dxg:GridColumn.HeaderPresenterType="Headers" x:Name="headerItemsControl" ItemsSource="{Binding Path=(dxg:GridControl.CurrentView).HeadersData.FixedNoneCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedNoneHeadersPanelTemplate}">
+                        </dxg:HeaderItemsControl>
+                    </dxg:GridScrollablePart.FixedNoneContent>
+                </dxg:GridScrollablePart>
+                <!--<dxg:VerticalLinesPainter x:Name="linesPainter" LineBrush="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=HeadersVerticalLineBrush}}" VerticalLines="{Binding Path=(dxg:GridControl.ActiveView).HeaderVerticalLines, RelativeSource={RelativeSource TemplatedParent}}"/>-->
+            </Grid>
+        </dx:MeasurePixelSnapper>
+    </DataTemplate>
+    <DataTemplate x:Key="GridRowThemeKey_AutoFilterRowItemTemplate">
+        <dxg:FilterCellContentPresenter RowData="{Binding RowData}" IsFocusedCell="{Binding Path=IsFocusedCell}" Column="{Binding Path=Column}" dxg:GridColumn.NavigationIndex="{Binding Path=Column.(dxg:GridColumn.VisibleIndex)}" Style="{Binding Path=Column.ActualCellStyle}" HasRightSibling="{Binding Path=Column.HasRightSibling}" HasLeftSibling="{Binding Path=Column.HasLeftSibling}" ShowVerticalLines="{Binding Path=Column.View.ShowVerticalLines}" Width="{Binding Path=Column.ActualAdditionalRowDataWidth}" SelectionState="{Binding Path=SelectionState}" />
+    </DataTemplate>
+    <DataTemplate x:Key="GridRowThemeKey_NewItemRowItemTemplate">
+        <dxg:NewItemRowCellContentPresenter RowData="{Binding RowData}" IsFocusedCell="{Binding Path=IsFocusedCell}" Column="{Binding Path=Column}" dxg:GridColumn.NavigationIndex="{Binding Path=Column.(dxg:GridColumn.VisibleIndex)}" Style="{Binding Path=Column.ActualCellStyle}" HasRightSibling="{Binding Path=Column.HasRightSibling}" HasLeftSibling="{Binding Path=Column.HasLeftSibling}" ShowVerticalLines="{Binding Path=Column.View.ShowVerticalLines}" Width="{Binding Path=Column.ActualAdditionalRowDataWidth}" SelectionState="{Binding Path=SelectionState}" />
+    </DataTemplate>
+    <DataTemplate x:Key="TableViewThemeKey_TotalSummaryContainerTemplate">
+        <dxg:GridTotalSummary DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=Column.ActualHeaderWidth}" dxg:GridColumn.VisibleIndex="{Binding Path=Column.(dxg:GridColumn.VisibleIndex)}" dxb:BarManager.DXContextMenu="{Binding Path=Column.View.GridMenu}">
+            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                <dxght:TotalSummaryTableViewHitTestAcceptor />
+            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+        </dxg:GridTotalSummary>
+    </DataTemplate>
+    <DataTemplate x:Key="TotalSummaryThemeKey_FootersTemplate">
+        <ContentControl Template="{StaticResource TotalSummaryThemeKey_FootersContentTemplate}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+            <dxg:GridScrollablePart ScrollingMargin="{Binding Path=(dxg:GridControl.CurrentView).ScrollingHeaderVirtualizationMargin, RelativeSource={RelativeSource TemplatedParent}}" FitContentWidth="{Binding Path=(dxg:GridControl.CurrentView).FitColumnWidth, RelativeSource={RelativeSource TemplatedParent}}" IndicatorWidth="{Binding Path=(dxg:GridControl.CurrentView).IndicatorWidth, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                <dxg:GridScrollablePart.FixedLeftContent>
+                    <dxg:TotalSummaryItemsControl ItemTemplate="{StaticResource TableViewThemeKey_TotalSummaryContainerTemplate}" ItemsSource="{Binding Path=(dxg:GridControl.CurrentView).HeadersData.FixedLeftCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedLeftNoneDropPanelTemplate}">
+                    </dxg:TotalSummaryItemsControl>
+                </dxg:GridScrollablePart.FixedLeftContent>
+                <dxg:GridScrollablePart.FixedRightContent>
+                    <dxg:TotalSummaryItemsControl ItemTemplate="{StaticResource TableViewThemeKey_TotalSummaryContainerTemplate}" ItemsSource="{Binding Path=(dxg:GridControl.CurrentView).HeadersData.FixedRightCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedRightNoneDropPanelTemplate}">
+                    </dxg:TotalSummaryItemsControl>
+                </dxg:GridScrollablePart.FixedRightContent>
+                <dxg:GridScrollablePart.FixedNoneContent>
+                    <dxg:TotalSummaryItemsControl ItemTemplate="{StaticResource TableViewThemeKey_TotalSummaryContainerTemplate}" x:Name="footerItemsControl" ItemsSource="{Binding Path=(dxg:GridControl.CurrentView).HeadersData.FixedNoneCellData, RelativeSource={RelativeSource TemplatedParent}}" ItemsPanel="{StaticResource TableViewThemeKey_FixedNoneDropPanelTemplate}">
+                    </dxg:TotalSummaryItemsControl>
+                </dxg:GridScrollablePart.FixedNoneContent>
+            </dxg:GridScrollablePart>
+        </ContentControl>
+    </DataTemplate>
+
+    <ControlTemplate x:Key="TableViewThemeKey_ControlTemplate">
+        <ScrollViewer x:Name="scr" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto" dxg:GridControl.CurrentView="{Binding RelativeSource={RelativeSource TemplatedParent}}" Template="{StaticResource TableViewThemeKey_ScrollViewerTemplate}">
+            <ScrollViewer.IsTabStop>False</ScrollViewer.IsTabStop>
+        </ScrollViewer>
+        
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TableViewThemeKey_ColumnChooserTemplate">
+        <dx:NonLogicalDecorator>
+            <dxg:ColumnChooserControl Owner="{Binding Path=(dxg:GridControl.ActiveView), RelativeSource={RelativeSource TemplatedParent}}" />
+        </dx:NonLogicalDecorator>
+    </ControlTemplate>
+
+    <!--END Include: \Generic\GridView.xaml -->
+    <!--START Include: \LightGray\GridControl.xaml -->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FF6593CF-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FFE3EFFF-->
+    <!--
+          removed SolidColorBrush x:Key =BaseBrush#FF202020-->
+    <ControlTemplate x:Key="GridControlThemeKey_Template" TargetType="dxg:GridControl">
+
+        <Grid>
+            <dx:DXArranger>
+                <dxg:DXGridThemesLoader x:Name="PART_ThemesLoader" dxg:GridBorderHelper.ShowBorder="{Binding Path=ShowBorder, RelativeSource={RelativeSource TemplatedParent}}" Template="{StaticResource GridControlThemeKey_BorderTemplate}" />
+            </dx:DXArranger>
+            <ContentControl x:Name="PART_LoadingPanel" Template="{StaticResource GridControlThemeKey_LoadingPanelTemplate}">
+                <ContentControl.Visibility>
+                    <Binding Path="ShowLoadingPanel" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:BooleanToVisibilityConverter />
+                        </Binding.Converter>
+                    </Binding>
+                </ContentControl.Visibility>
+            </ContentControl>
+        </Grid>
+
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridControlThemeKey_LoadingPanelTemplate">
+        <Grid>
+            <Border Background="White" Opacity="0.8" />
+            <Grid x:Name="grid" HorizontalAlignment="Center" Height="42" VerticalAlignment="Center" Width="42" RenderTransformOrigin="0.5, 0.5">
+                <Path Stretch="Fill" Fill="White" Data="F1 M 682,402L 689.343,402L 684.151,396.808C 682.589,395.246 682.589,392.713 684.151,391.151C 685.713,389.589 688.246,389.589 689.808,391.151L 695,396.343L 695,389C 695,386.791 696.791,385 699,385C 701.209,385 703,386.791 703,389L 703,396.343L 708.192,391.151C 709.754,389.589 712.287,389.589 713.849,391.151C 715.411,392.713 715.411,395.246 713.849,396.808L 708.657,402L 716,402C 718.209,402 720,403.791 720,406C 720,408.209 718.209,410 716,410L 708.657,410L 713.849,415.192C 715.411,416.754 715.411,419.287 713.849,420.849C 712.287,422.411 709.754,422.411 708.192,420.849L 703,415.657L 703,423C 703,425.209 701.209,427 699,427C 696.791,427 695,425.209 695,423L 695,415.657L 689.808,420.849C 688.246,422.411 685.713,422.411 684.151,420.849C 682.589,419.287 682.589,416.754 684.151,415.192L 689.343,410L 682,410C 679.791,410 678,408.209 678,406C 678,403.791 679.791,402 682,402 Z " />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 712.435,392.565L 712.435,392.565C 713.216,393.346 713.216,394.612 712.435,395.393L 706.071,401.757C 705.29,402.538 704.024,402.538 703.243,401.757L 703.243,401.757C 702.462,400.976 702.462,399.71 703.243,398.929L 709.607,392.565C 710.388,391.784 711.654,391.784 712.435,392.565 Z " HorizontalAlignment="Right" Height="10.364" Margin="0,6.979,6.979,0" VerticalAlignment="Top" Width="10.364" Opacity="0.3" />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 718,406L 718,406C 718,407.105 717.105,408 716,408L 707,408C 705.896,408 705,407.105 705,406L 705,406C 705,404.896 705.896,404 707,404L 716,404C 717.105,404 718,404.896 718,406 Z " HorizontalAlignment="Right" Margin="0,19,2,19" Width="13" Opacity="0.4" />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 712.435,419.435L 712.435,419.435C 711.654,420.216 710.388,420.216 709.607,419.435L 703.243,413.071C 702.462,412.29 702.462,411.024 703.243,410.243L 703.243,410.243C 704.024,409.462 705.29,409.462 706.071,410.243L 712.435,416.607C 713.216,417.388 713.216,418.654 712.435,419.435 Z " HorizontalAlignment="Right" Height="10.364" Margin="0,0,6.979,6.979" VerticalAlignment="Bottom" Width="10.364" Opacity="0.5" />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 699,412L 699,412C 700.105,412 701,412.896 701,414L 701,423C 701,424.105 700.105,425 699,425L 699,425C 697.896,425 697,424.105 697,423L 697,414C 697,412.896 697.896,412 699,412 Z " Height="13" Margin="19,0,19,2" VerticalAlignment="Bottom" Opacity="0.6" />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 694.757,410.243L 694.757,410.243C 695.539,411.024 695.539,412.29 694.757,413.071L 688.393,419.435C 687.612,420.216 686.346,420.216 685.565,419.435L 685.565,419.435C 684.784,418.654 684.784,417.388 685.565,416.607L 691.929,410.243C 692.71,409.462 693.976,409.462 694.757,410.243 Z " HorizontalAlignment="Left" Height="10.364" Margin="6.979,0,0,6.979" VerticalAlignment="Bottom" Width="10.364" Opacity="0.7" />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 693,406L 693,406C 693,407.105 692.105,408 691,408L 682,408C 680.895,408 680,407.105 680,406L 680,406C 680,404.896 680.895,404 682,404L 691,404C 692.105,404 693,404.896 693,406 Z " HorizontalAlignment="Left" Margin="2,19,0,19" Width="13" Opacity="0.8" />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 694.757,401.757L 694.757,401.757C 693.976,402.538 692.71,402.538 691.929,401.757L 685.565,395.393C 684.784,394.612 684.784,393.346 685.565,392.565L 685.565,392.565C 686.346,391.784 687.612,391.784 688.393,392.565L 694.757,398.929C 695.538,399.71 695.538,400.976 694.757,401.757 Z " HorizontalAlignment="Left" Height="10.364" Margin="6.979,6.979,0,0" VerticalAlignment="Top" Width="10.364" Opacity="0.9" />
+                <Path Stretch="Fill" Fill="#FF6E6E6E" Data="F1 M 699,387L 699,387C 700.105,387 701,387.896 701,389L 701,398C 701,399.105 700.105,400 699,400L 699,400C 697.896,400 697,399.105 697,398L 697,389C 697,387.896 697.896,387 699,387 Z " Height="13" Margin="19,2,19,0" VerticalAlignment="Top" />
+            </Grid>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Grid.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever" SpeedRatio="8">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="RenderTransform" Duration="0:0:8">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <RotateTransform Angle="45" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:2">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <RotateTransform Angle="90" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:3">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <RotateTransform Angle="135" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:4">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <RotateTransform Angle="180" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:5">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <RotateTransform Angle="225" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:6">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <RotateTransform Angle="270" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:7">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <RotateTransform Angle="315" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridControlThemeKey_BorderTemplate" TargetType="ContentControl">
+        <!--<Border x:Name="border" Background="Transparent">
+            <Border.Padding>
+                <Binding Path="(dxg:GridBorderHelper.ShowBorder)" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter FalseValue="0" TrueValue="1"/>
+                    </Binding.Converter>
+                </Binding>
+            </Border.Padding>-->
+        <Border Background="#FF6E6E6E">
+            <Border.CornerRadius>
+                <Binding Path="(dxg:GridBorderHelper.ShowBorder)" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter FalseValue="0" TrueValue="3" />
+                    </Binding.Converter>
+                </Binding>
+            </Border.CornerRadius>
+            <dx:FrameworkElementHelper.ClipCornerRadius>
+                <Binding Path="(dxg:GridBorderHelper.ShowBorder)" RelativeSource="{RelativeSource TemplatedParent}">
+                    <Binding.Converter>
+                        <dx:BoolToObjectConverter FalseValue="0" TrueValue="3" />
+                    </Binding.Converter>
+                </Binding>
+            </dx:FrameworkElementHelper.ClipCornerRadius>
+            <ContentPresenter />
+        </Border>
+        <!--</Border>-->
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridControlThemeKey_FocusedGroupRowBorderTemplate">
+        <Rectangle StrokeDashArray="2 2" Stroke="#FF202020 " StrokeThickness="1" Margin="1,1,1,3" />
+    </ControlTemplate>
+    <!--END Include: \LightGray\GridControl.xaml -->
+    <!--START Include: \LightGray\ColumnHeaderDragIndicator.xaml -->
+
+    <DataTemplate x:Key="GridColumnHeaderThemeKey_DragIndicatorTemplate">
+        <dx:DXDockPanel Name="content">
+            <Grid dx:DXDockPanel.Dock="Top" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" x:Name="arrow_up" VerticalAlignment="Top" Width="13" Height="13">
+                <Path Width="13" Height="11" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#FF151515" Data="F1 M 0,5L 6,11L 7,11L 13,5L 13,4L 10,4L 10,0L 3,0L 3,4L 0,4L 0,5 Z " />
+                <Path Width="11" Height="9" Canvas.Left="1" Canvas.Top="1" Stretch="Fill" Fill="#FFFFFFFF" Data="F1 M 1,5L 6,10L 7,10L 12,5L 9,5L 9,1L 4,1L 4,5L 1,5 Z " />
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="ArrowUpTransform" X="1" Y="0" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid dx:DXDockPanel.Dock="Bottom" RenderTransformOrigin="0.5,0.5" x:Name="arrow_down" Width="Auto" Height="14" VerticalAlignment="Bottom">
+                <Path Width="13" Height="11" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#FF151515" Data="F1 M 13,6L 7,0L 6,0L 0,6L 0,7L 3,7L 3,11L 10,11L 10,7L 13,7L 13,6 Z " />
+                <Path Width="11" Height="9" Canvas.Left="1" Canvas.Top="1" Stretch="Fill" Fill="#FFFFFFFF" Data="F1 M 12,6L 7,1L 6,1L 1,6L 4,6L 4,10L 9,10L 9,6L 12,6 Z " />
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="ArrowDownTransform" X="1" Y="0" />
+                </Grid.RenderTransform>
+            </Grid>
+
+
+            <Grid Height="{Binding (dxg:TableView.ColumnHeaderDragIndicatorSize), RelativeSource={RelativeSource TemplatedParent}}" />
+
+            <dx:DXDockPanel.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="ArrowUpTransform" From="0" To="4" Duration="00:00:00.75" Storyboard.TargetProperty="Y" AutoReverse="True" RepeatBehavior="Forever" />
+                                <DoubleAnimation Storyboard.TargetName="ArrowDownTransform" From="0" To="-4" Duration="00:00:00.75" Storyboard.TargetProperty="Y" AutoReverse="True" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </dx:DXDockPanel.Triggers>
+            <dx:DXDockPanel.RenderTransform>
+                <TranslateTransform X="-7.40686" Y="-14" />
+            </dx:DXDockPanel.RenderTransform>
+        </dx:DXDockPanel>
+
+    </DataTemplate>
+
+    <!--END Include: \LightGray\ColumnHeaderDragIndicator.xaml -->
+    <!--START Include: \Generic\GridControl.xaml -->
+
+
+    <ControlTemplate x:Key="GridControlThemeKey_FocusedRowBorderTemplate">
+        <Rectangle StrokeDashArray="2 2" Stroke="#FF202020" StrokeThickness="1" Margin="0,0,0,1" />
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridControlThemeKey_FocusedCellBorderTemplate">
+        <Rectangle StrokeDashArray="2 2" Stroke="#FF202020" StrokeThickness="1" Margin="0,0,1,0" />
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridControlThemeKey_AdditionalRowsFocusedCellBorderTemplate">
+        <Rectangle StrokeDashArray="2 2" Stroke="#FF202020" StrokeThickness="1" Margin="0,0,0,0" />
+    </ControlTemplate>
+
+    <!--END Include: \Generic\GridControl.xaml -->
+    <!--START Include: \Generic\DefaultGridViewStyles.xaml -->
+    <!--PROCESS SETTERS WITH BINDING-->
+    <Style TargetType="dxg:FilterCellContentPresenter">
+        <Setter Property="Template" Value="{StaticResource GridRowThemeKey_FilterCellContentPresenterTemplate}" />
+        <Setter Property="BorderBrush" Value="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" />
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:RowCellTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="dxg:NewItemRowCellContentPresenter">
+        <Setter Property="Template" Value="{StaticResource GridRowThemeKey_NewItemRowCellContentPresenterTemplate}" />
+        <Setter Property="BorderBrush" Value="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" />
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:RowCellTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="dxg:GridRowContent">
+        <Setter Property="Template" Value="{StaticResource GridRowThemeKey_RowControlContainerTemplate}" />
+        <Setter Property="BorderBrush" Value="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" />
+    </Style>
+    <Style TargetType="dxg:GroupGridRowContent">
+        <Setter Property="Template" Value="{StaticResource GroupRowThemeKey_GroupRowContentTemplate}" />
+    </Style>
+    <DataTemplate x:Key="GridColumnHeaderThemeKey_DragElementTemplate">
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Left" DataContext="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <dxg:DragGridColumnHeader dxg:GridColumnHeader.GridColumn="{Binding}" Width="{Binding Path=(dxg:GridColumnHeader.DragElementSize).Width, RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(dxg:GridColumnHeader.DragElementSize).Height, RelativeSource={RelativeSource TemplatedParent}}" />
+            <dx:DragIconControl Grid.Row="1" Grid.Column="1" Margin="-12,-12,0,0" Name="dropIndicator" DragType="Remove">
+                <dx:DragIconControl.Opacity>
+                    <Binding Path="(dxg:GridColumnHeader.IsInDropArea)" RelativeSource="{RelativeSource TemplatedParent}">
+                        <Binding.Converter>
+                            <dx:BoolToObjectConverter TrueValue="1" FalseValue="0" />
+                        </Binding.Converter>
+                    </Binding>
+                </dx:DragIconControl.Opacity>
+            </dx:DragIconControl>
+        </Grid>
+    </DataTemplate>
+    <dxg:TooltipToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
+    <Style TargetType="dxg:ColumnChooserControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dxg:ColumnChooserControl">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer.Template>
+                            <ControlTemplate TargetType="ScrollViewer">
+                                <Grid Background="{StaticResource TableViewThemeKey_ColumnChooserBackgroundBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ScrollContentPresenter Name="PART_ScrollContentPresenter" Content="{TemplateBinding Content}" />
+                                    <ScrollBar Grid.Column="1" Grid.RowSpan="2" Value="{Binding VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Maximum="{Binding ScrollableHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" ViewportSize="{Binding ViewportHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Visibility="{Binding ComputedVerticalScrollBarVisibility, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+
+                                        <ScrollBar.Name>VerticalScrollBar</ScrollBar.Name>
+                                    </ScrollBar>
+                                    <ScrollBar Grid.Row="1" Orientation="Horizontal" Value="{Binding HorizontalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Maximum="{Binding ScrollableWidth, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" ViewportSize="{Binding ViewportWidth, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Visibility="{Binding ComputedHorizontalScrollBarVisibility, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}">
+
+                                        <ScrollBar.Name>HorizontalScrollBar</ScrollBar.Name>
+                                    </ScrollBar>
+                                    <Border Grid.Row="1" Grid.Column="1" x:Name="PART_HorizontalScrollCorner" Style="{StaticResource ScrollBarThemeKey_ScrollingCornerStyle}" Margin="0" />
+                                </Grid>
+                            </ControlTemplate>
+                        </ScrollViewer.Template>
+                        <Grid>
+                            <dx:CachedItemsControl ItemsSource="{Binding Path=Owner.ColumnChooserColumns, RelativeSource={RelativeSource TemplatedParent}}">
+                                <dx:CachedItemsControl.Visibility>
+                                    <Binding Path="Owner.ColumnChooserColumns" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:ObjectToVisibilityConverter />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </dx:CachedItemsControl.Visibility>
+                                <dx:CachedItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <dxg:GridColumnHeader DataContext="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridColumn.HeaderPresenterType="ColumnChooser" dxg:GridColumnHeader.GridColumn="{Binding}" Margin="1,1,1,0" dxg:GridColumn.ColumnPosition="Standalone" Template="{StaticResource GridColumnHeaderThemeKey_ColumnChooserTemplate}" UseLayoutRounding="True" dxg:GridPopupMenu.GridMenuType="Column" dxb:BarManager.DXContextMenu="{Binding Path=View.GridMenu}" />
+                                    </DataTemplate>
+                                </dx:CachedItemsControl.ItemTemplate>
+                                <dx:CachedItemsControl.ItemsPanel>
+                                    <ControlTemplate>
+                                        <StackPanel dxg:GridColumn.HeaderPresenterType="ColumnChooser" Orientation="Vertical" Margin="1,1,1,2" />
+                                    </ControlTemplate>
+                                </dx:CachedItemsControl.ItemsPanel>
+                            </dx:CachedItemsControl>
+                            <TextBlock Style="{StaticResource TableViewThemeKey_ColumnChooserDragTextStyle}">
+                                <TextBlock.Text>
+                                    <Binding ConverterParameter="ColumnChooserDragText" Path="Owner.LocalizationDescriptor" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dxg:DynamicLocalizationStringValueConvertor />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </TextBlock.Text>
+                                <TextBlock.Visibility>
+                                    <Binding Path="Owner.ColumnChooserColumns" RelativeSource="{RelativeSource TemplatedParent}">
+                                        <Binding.Converter>
+                                            <dx:ObjectToVisibilityConverter Invert="True" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </TextBlock.Visibility>
+                            </TextBlock>
+                        </Grid>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="dx:DragManager.DropTargetFactory">
+            <Setter.Value>
+                <dxgcore:ColumnChooserDropTargetFactory />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="dxg:GridColumn.HeaderPresenterType" Value="ColumnChooser" />
+    </Style>
+    <Style TargetType="dxg:BestFitControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dxg:BestFitControl">
+                    <dxg:GridRowContent Style="{Binding Path=RowData.View.RowStyle, RelativeSource={RelativeSource TemplatedParent}}" dxg:RowIndicatorViewInfo.ActualRowIndicatorHeight="{Binding CurrentHeight, RelativeSource={RelativeSource Self}, Mode=OneWay}">
+                        <dxg:GridRowContent.Template>
+                            <ControlTemplate TargetType="dxg:GridRowContent">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </dxg:GridRowContent.Template>
+                        <dxg:BestFitGridCellContentPresenter IsFocusedCell="{TemplateBinding IsFocusedCell}" RowData="{Binding RowData, RelativeSource={RelativeSource TemplatedParent}}" Style="{Binding Path=Column.ActualCellStyle, RelativeSource={RelativeSource TemplatedParent}}" Column="{TemplateBinding Column}" HasRightSibling="True" />
+                    </dxg:GridRowContent>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="dxg:GridTotalSummary">
+        <Setter Property="Template" Value="{StaticResource TotalSummaryThemeKey_TotalSummaryControlTemplate}" />
+    </Style>
+
+
+    <DataTemplate x:Key="GroupRowThemeKey_GroupSummaryItemTemplate">
+        <Border Style="{Binding Path=View.GroupSummaryContentStyle}">
+            <StackPanel Orientation="Horizontal" Name="defaultGroupSummaryItemTemplateStackPanel">
+                <TextBlock Text="{Binding Text}" />
+                <TextBlock Text=", " Name="commaTextBlock" Visibility="{Binding IsLast, Converter={StaticResource BooleanToVisibilityConverterInverted}}" />
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <Style x:Key="GridViewBaseStyle" TargetType="dxg:GridViewBase">
+        <Setter Property="HeaderTemplate" Value="{StaticResource TableViewThemeKey_HeadersTemplate}" />
+        <Setter Property="FooterTemplate" Value="{StaticResource TotalSummaryThemeKey_FootersTemplate}" />
+        <Setter Property="GroupRowTemplate" Value="{StaticResource GroupRowThemeKey_GroupRowTemplate}" />
+        <Setter Property="GroupValueTemplate" Value="{StaticResource GroupRowThemeKey_GroupValueTemplate}" />
+        <Setter Property="DefaultGroupSummaryItemTemplate" Value="{StaticResource GroupRowThemeKey_GroupSummaryItemTemplate}" />
+        <Setter Property="GroupSummaryItemTemplate" Value="{StaticResource GroupRowThemeKey_GroupSummaryItemTemplate}" />
+        <Setter Property="TotalSummaryItemTemplate" Value="{StaticResource TotalSummaryThemeKey_TotalSummaryItemTemplate}" />
+        <Setter Property="ColumnHeaderContentStyle" Value="{StaticResource GridColumnHeaderThemeKey_ContentStyle}" />
+        <Setter Property="ColumnHeaderTemplate" Value="{StaticResource GridColumnHeaderThemeKey_ContentTemplate}" />
+        <Setter Property="ColumnHeaderCustomizationAreaTemplate" Value="{StaticResource GridColumnHeaderThemeKey_CustomizationAreaTemplate}" />
+        <Setter Property="CellStyle" Value="{StaticResource GridRowThemeKey_CellStyle}" />
+        <Setter Property="TotalSummaryContentStyle" Value="{StaticResource TotalSummaryThemeKey_TotalSummaryContentStyle}" />
+        <Setter Property="GroupRowStyle" Value="{StaticResource GroupRowThemeKey_GroupRowStyle}" />
+        <Setter Property="ColumnHeaderDragIndicatorTemplate" Value="{StaticResource GridColumnHeaderThemeKey_DragIndicatorTemplate}" />
+        <Setter Property="ColumnChooserTemplate" Value="{StaticResource TableViewThemeKey_ColumnChooserTemplate}" />
+        <Setter Property="Margin" Value="{StaticResource TableViewThemeKey_Margin}" />
+        <Setter Property="FocusedCellBorderTemplate" Value="{StaticResource GridControlThemeKey_FocusedCellBorderTemplate}" />
+        <Setter Property="FocusedGroupRowBorderTemplate" Value="{StaticResource GridControlThemeKey_FocusedGroupRowBorderTemplate}" />
+        <Setter Property="AdditionalRowsFocusedCellBorderTemplate" Value="{StaticResource GridControlThemeKey_AdditionalRowsFocusedCellBorderTemplate}" />
+
+    </Style>
+
+    <sys:String x:Key="GroupRowThemeKey_ExpandingStoryboard">
+        &lt;Storyboard&gt;
+            &lt;DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="AnimationProgress"&gt;
+                    &lt;SplineDoubleKeyFrame KeyTime="0:0:1" Value="1" KeySpline="0,0,0,1"/&gt;
+            &lt;/DoubleAnimationUsingKeyFrames&gt;
+        &lt;/Storyboard&gt;
+    </sys:String>
+    <sys:String x:Key="GroupRowThemeKey_CollapsingStoryboard">
+        &lt;Storyboard&gt;
+            &lt;DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="AnimationProgress"&gt;
+                    &lt;SplineDoubleKeyFrame KeyTime="0:0:1" Value="0" KeySpline="0,0,1,0.25"/&gt;
+            &lt;/DoubleAnimationUsingKeyFrames&gt;
+        &lt;/Storyboard&gt;
+    </sys:String>
+
+    <Style TargetType="dxg:TableView" BasedOn="{StaticResource GridViewBaseStyle}">
+        <Setter Property="Template" Value="{StaticResource TableViewThemeKey_ControlTemplate}" />
+        <Setter Property="RowDecorationTemplate" Value="{StaticResource GridRowThemeKey_RowDecorationTemplate}" />
+        <Setter Property="RowIndicatorContentTemplate" Value="{StaticResource RowIndicatorThemeKey_IconPresenterTemplate}" />
+        <Setter Property="DefaultDataRowTemplate" Value="{StaticResource GridRowThemeKey_DataRowTemplate}" />
+        <Setter Property="DataRowTemplate" Value="{StaticResource GridRowThemeKey_DataRowTemplate}" />
+        <Setter Property="LeftDataAreaIndent" Value="{StaticResource TableViewThemeKey_LeftDataAreaIndent}" />
+        <Setter Property="RightDataAreaIndent" Value="{StaticResource TableViewThemeKey_RightDataAreaIndent}" />
+        <Setter Property="LeftGroupAreaIndent" Value="{StaticResource TableViewThemeKey_LeftGroupAreaIndent}" />
+        <Setter Property="RightGroupAreaIndent" Value="{StaticResource TableViewThemeKey_RightGroupAreaIndent}" />
+        <Setter Property="FixedLineWidth" Value="{StaticResource TableViewThemeKey_FixedLineWidth}" />
+        <Setter Property="IndicatorWidth" Value="{StaticResource TableViewThemeKey_IndicatorWidth}" />
+        <Setter Property="dx:ExpandHelper.ExpandStoryboard" Value="{StaticResource GroupRowThemeKey_ExpandingStoryboard}" />
+        <Setter Property="dx:ExpandHelper.CollapseStoryboard" Value="{StaticResource GroupRowThemeKey_CollapsingStoryboard}" />
+        <Setter Property="PrintRowTemplate" Value="{StaticResource TableViewThemeKey_PrintRowTemplate}" />
+        <Setter Property="PrintHeaderTemplate" Value="{StaticResource TableViewThemeKey_PrintHeaderTemplate}" />
+        <Setter Property="PrintFooterTemplate" Value="{StaticResource TableViewThemeKey_PrintFooterTemplate}" />
+        <Setter Property="PrintGroupRowTemplate" Value="{StaticResource TableViewThemeKey_PrintGroupRowTemplate}" />
+        <Setter Property="PrintColumnHeaderStyle" Value="{StaticResource TableViewThemeKey_DefaultPrintHeaderStyle}" />
+        <Setter Property="PrintTotalSummaryStyle" Value="{StaticResource TableViewThemeKey_DefaultPrintTotalSummaryStyle}" />
+        <Setter Property="PrintGroupRowStyle" Value="{StaticResource TableViewThemeKey_DefaultPrintGroupRowStyle}" />
+        <Setter Property="PrintCellStyle" Value="{StaticResource TableViewThemeKey_DefaultPrintCellStyle}" />
+        <Setter Property="FocusedRowBorderTemplate" Value="{StaticResource GridControlThemeKey_FocusedRowBorderTemplate}" />
+
+    </Style>
+
+    <Style TargetType="dxg:GridControl">
+
+        <Setter Property="UseLayoutRounding" Value="true" />
+        <Setter Property="Template" Value="{StaticResource GridControlThemeKey_Template}" />
+        <Setter Property="dx:DXSerializer.SerializationIDDefault" Value="GridControl" />
+
+    </Style>
+    <Style TargetType="dxg:AdditionalRowContainerControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dxg:AdditionalRowContainerControl">
+                    <dx:DXDockPanel>
+                        <ContentPresenter x:Name="PART_Indicator" dx:DXDockPanel.Dock="Left" Content="{Binding}" ContentTemplate="{StaticResource RowIndicatorThemeKey_RowTemplate}" Width="{TemplateBinding IndicatorWidth}">
+                            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                <dxght:RowIndicatorTableViewHitTestAcceptor />
+                            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+
+                            <ContentPresenter.Visibility>
+                                <Binding Path="(dxg:GridControl.CurrentView).ShowIndicator" RelativeSource="{RelativeSource TemplatedParent}">
+                                    <Binding.Converter>
+                                        <dx:BoolToVisibilityConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </ContentPresenter.Visibility>
+                        </ContentPresenter>
+                        <ContentControl Template="{Binding Path=RowTemplate, RelativeSource={RelativeSource TemplatedParent}}">
+                            <dx:MeasurePixelSnapper>
+                                <dxg:GridScrollablePart x:Name="ScrollablePart" FixedColumnsDelimiterTemplate="{StaticResource GridRowThemeKey_FixedColumnsDelimiterTemplate}" ScrollingMargin="{Binding Path=(dxg:GridControl.CurrentView).ScrollingHeaderVirtualizationMargin, RelativeSource={RelativeSource TemplatedParent}}" FitContentWidth="{Binding Path=(dxg:GridControl.CurrentView).AdditionalRowFitColumnWidth, RelativeSource={RelativeSource TemplatedParent}}" dxg:GridControl.CurrentView="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                                    <dxg:GridScrollablePart.FitContent>
+                                        <ContentPresenter Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{StaticResource GridRowThemeKey_FitColumnContentTemplate}" />
+                                    </dxg:GridScrollablePart.FitContent>
+
+                                    <dxg:GridScrollablePart.FixedLeftContent>
+                                        <dxg:RowItemsControl Name="PART_FixedLeftColumnsItemsControl" ItemsSource="{Binding Path=FixedLeftCellData}" ItemsPanel="{StaticResource TableViewThemeKey_FixedLeftNoneDropPanelTemplate}" ItemTemplate="{TemplateBinding ItemTemplate}" />
+                                    </dxg:GridScrollablePart.FixedLeftContent>
+                                    <dxg:GridScrollablePart.FixedRightContent>
+                                        <dxg:RowItemsControl Name="PART_FixedRightColumnsItemsControl" ItemsSource="{Binding Path=FixedRightCellData}" ItemsPanel="{StaticResource TableViewThemeKey_FixedRightNoneDropPanelTemplate}" ItemTemplate="{TemplateBinding ItemTemplate}" />
+                                    </dxg:GridScrollablePart.FixedRightContent>
+                                    <dxg:GridScrollablePart.FixedNoneContent>
+                                        <dxg:RowItemsControl Name="PART_FixedNoneColumnsItemsControl" ItemsSource="{Binding Path=FixedNoneCellData}" ItemsPanel="{StaticResource TableViewThemeKey_FixedNoneDropPanelTemplate}" ItemTemplate="{TemplateBinding ItemTemplate}" />
+                                    </dxg:GridScrollablePart.FixedNoneContent>
+                                </dxg:GridScrollablePart>
+                            </dx:MeasurePixelSnapper>
+                        </ContentControl>
+                    </dx:DXDockPanel>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:RowTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="dxg:GridItemsContainer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="DataRowsTemplate" Value="{StaticResource GridRowThemeKey_DataRowsTemplate}" />
+        <Setter Property="GroupRowsTemplate" Value="{StaticResource GroupRowThemeKey_GroupRowsTemplate}" />
+    </Style>
+    <Style TargetType="dxg:GridViewDataRowsControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <dxg:RowsItemsControl ItemsSource="{Binding Path=Items}">
+                        <dxg:RowsItemsControl.ItemsPanel>
+                            <ControlTemplate>
+                                <dx:StackVisibleIndexPanel Orientation="Vertical" ArrangeAccordingToVisibleIndex="True" />
+                            </ControlTemplate>
+                        </dxg:RowsItemsControl.ItemsPanel>
+                    </dxg:RowsItemsControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="dxg:GridRow">
+        <Setter Property="Foreground" Value="Black" />
+
+        <Setter Property="Template" Value="{StaticResource GridRowThemeKey_RowControlTemplate}" />
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:RowTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="dxg:GridViewGroupRowsControl">
+        <Setter Property="Template" Value="{StaticResource GroupRowThemeKey_GroupRowsControlTemplate}" />
+    </Style>
+    <Style TargetType="dxg:GroupGridRow">
+
+        <Setter Property="Template" Value="{StaticResource GroupRowThemeKey_GroupRowControlTemplate}" />
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:GroupRowTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="dxg:GridScrollablePart">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dxg:GridScrollablePart">
+                    <dx:DXDockPanel LastChildFill="True">
+                        <ContentPresenter Name="PART_Indicator" dx:DXDockPanel.Dock="Left" DataContext="{Binding}" Width="{Binding Path=IndicatorWidth, RelativeSource={RelativeSource TemplatedParent}}">
+
+                            <ContentPresenter.Visibility>
+                                <Binding Path="(dxg:GridControl.CurrentView).ShowIndicator" RelativeSource="{RelativeSource TemplatedParent}">
+                                    <Binding.Converter>
+                                        <dx:BoolToVisibilityConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </ContentPresenter.Visibility>
+                        </ContentPresenter>
+                        <ContentPresenter Name="PART_FixedLeftContent" dxg:TableView.FixedAreaStyle="Left" dx:DXDockPanel.Dock="Left" DataContext="{Binding}" />
+                        <ContentPresenter x:Name="fixedLeftLinePlaceHolder" ContentTemplate="{TemplateBinding FixedColumnsDelimiterTemplate}" dx:DXDockPanel.Dock="Left" Width="{Binding Path=(dxg:GridControl.CurrentView).FixedLineWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ContentPresenter.Visibility>
+                                <Binding Path="(dxg:GridControl.CurrentView).FixedLeftVisibleColumns" RelativeSource="{RelativeSource TemplatedParent}">
+                                    <Binding.Converter>
+                                        <dx:ObjectToVisibilityConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </ContentPresenter.Visibility>
+                            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                <dxght:FixedLeftDivTableViewHitTestAcceptor />
+                            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                        </ContentPresenter>
+                        <ContentPresenter Name="PART_FitContent" dx:DXDockPanel.Dock="Right" DataContext="{Binding}" Width="{Binding Path=FitContentWidth, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <ContentPresenter Name="PART_FixedRightContent" dxg:TableView.FixedAreaStyle="Right" dx:DXDockPanel.Dock="Right" DataContext="{Binding}" />
+                        <ContentPresenter x:Name="fixedRightLinePlaceHolder" ContentTemplate="{TemplateBinding FixedColumnsDelimiterTemplate}" dx:DXDockPanel.Dock="Right" Width="{Binding Path=(dxg:GridControl.CurrentView).FixedLineWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ContentPresenter.Visibility>
+                                <Binding Path="(dxg:GridControl.CurrentView).FixedRightVisibleColumns" RelativeSource="{RelativeSource TemplatedParent}">
+                                    <Binding.Converter>
+                                        <dx:ObjectToVisibilityConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </ContentPresenter.Visibility>
+                            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+                                <dxght:FixedRightDivTableViewHitTestAcceptor />
+                            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+                        </ContentPresenter>
+                        <Border Name="fixedNoneCellsBorder">
+                            <dxg:FocusRectPresenter.IsHorizontalScrollHost>
+                                True
+                            </dxg:FocusRectPresenter.IsHorizontalScrollHost>
+
+                            <dx:FrameworkElementExtensions.IsClipped>
+                                True
+                            </dx:FrameworkElementExtensions.IsClipped>
+
+                            <ContentPresenter Name="PART_FixedNoneContent" DataContext="{Binding}" Margin="{Binding ScrollingMargin, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Border>
+                    </dx:DXDockPanel>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="dxg:GridCellContentPresenter">
+        <Setter Property="Template" Value="{StaticResource GridRowThemeKey_CellContentPresenterTemplate}" />
+        <Setter Property="BorderBrush" Value="{StaticResource GridRowThemeKey_GridDataRowDelimiterBrush}" />
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:RowCellTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="BaseDataContentPresenterStyle" TargetType="Control">
+
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style TargetType="dxg:GroupGridRowPresenter" BasedOn="{StaticResource BaseDataContentPresenterStyle}">
+    </Style>
+    <Style TargetType="dxg:GroupValueContentPresenter" BasedOn="{StaticResource BaseDataContentPresenterStyle}">
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:GroupValueTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="dxg:GroupSummaryContentPresenter" BasedOn="{StaticResource BaseDataContentPresenterStyle}">
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:GroupSummaryTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="dxg:TotalSummaryContentPresenter" BasedOn="{StaticResource BaseDataContentPresenterStyle}">
+    </Style>
+    <Style TargetType="dxg:GridGroupExpandButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <dxg:GridToggleStateButton dx:DataObjectBase.DataObject="{Binding}" dx:DataObjectBase.NeedsResetEvent="True" x:Name="toggleButton" ClickMode="Press" IsChecked="{Binding Path=IsChecked, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Command="{Binding View.Commands.ChangeGroupExpanded}" CommandParameter="{Binding RowHandle.Value}" Style="{StaticResource GroupRowThemeKey_ExpandButtonStyle}" Foreground="{TemplateBinding Foreground}">
+
+
+                    </dxg:GridToggleStateButton>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+            <Setter.Value>
+                <dxght:GroupRowButtonTableViewHitTestAcceptor />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="GridColumnHeaderBaseStyle" TargetType="dxgcore:GridColumnHeaderBase">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <!--<Setter Property="Foreground" Value="#22336a" />-->
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template" Value="{StaticResource GridColumnHeaderThemeKey_ControlTemplate}" />
+        <Setter Property="dxg:GridColumnHeader.DragElementTemplate" Value="{StaticResource GridColumnHeaderThemeKey_DragElementTemplate}" />
+    </Style>
+    <Style TargetType="dxg:FitColumnHeader" BasedOn="{StaticResource GridColumnHeaderBaseStyle}">
+    </Style>
+    <Style TargetType="dxg:IndicatorColumnHeader" BasedOn="{StaticResource GridColumnHeaderBaseStyle}">
+    </Style>
+    <Style TargetType="dxg:GridColumnHeader" BasedOn="{StaticResource GridColumnHeaderBaseStyle}">
+
+        <Setter Property="ColumnFilterPopupTemplate" Value="{StaticResource GridColumnHeaderThemeKey_FilterAreaTemplate}" />
+    </Style>
+    <Style TargetType="dxg:DragGridColumnHeader" BasedOn="{StaticResource GridColumnHeaderBaseStyle}">
+        <Setter Property="Opacity" Value="0.5" />
+
+    </Style>
+    <!--END Include: \Generic\DefaultGridViewStyles.xaml -->
+    <!--START Include: \Generic\LookUpEdit.xaml -->
+
+
+
+
+    <ControlTemplate x:Key="LookUpEditThemeKey_PopupContentTemplate" TargetType="ContentControl">
+        <dxg:GridControl x:Name="PART_GridControl" ShowBorder="False" />
+    </ControlTemplate>
+
+
+    <Style TargetType="dxgl:LookUpEdit" dx:ThemeManager.InheritedStyleSource="{StaticResource EditorsDictionary}">
+        <Setter Property="ValidateOnTextInput" Value="false" />
+        <Setter Property="AutoComplete" Value="true" />
+        <Setter Property="IncrementalFiltering" Value="true" />
+        <Setter Property="AllowRecreatePopupContent" Value="false" />
+        <Setter Property="PopupContentTemplate" Value="{StaticResource LookUpEditThemeKey_PopupContentTemplate}" />
+    </Style>
+
+    <!--END Include: \Generic\LookUpEdit.xaml -->
+</ResourceDictionary>

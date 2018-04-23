@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.Xpf.Core.v10.2;component/Themes/LightGray/RadioButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource RadioButtonBaseStyle}" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="#FF313131" />
+    </Style>
+    
+</ResourceDictionary>
