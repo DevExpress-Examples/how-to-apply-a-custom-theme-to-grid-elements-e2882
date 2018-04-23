@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.Xpf.Core.v12.2;component/Themes/generic.xaml" />
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.RichEdit" ProductSource="/DevExpress.Xpf.RichEdit.v12.2;component/Themes/generic.xaml" />
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.RichEdit.v12.2.Extensions" ProductSource="/DevExpress.Xpf.RichEdit.v12.2.Extensions;component/Themes/generic.xaml" />
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.Controls" ProductSource="/DevExpress.Xpf.Controls.v12.2;component/Themes/generic.xaml" />
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.LayoutControl" ProductSource="/DevExpress.Xpf.LayoutControl.v12.2;component/generic.xaml"/>
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.NavBar" ProductSource="/DevExpress.Xpf.NavBar.v12.2;component/Themes/generic.xaml" />
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.Printing" ProductSource="/DevExpress.Xpf.Printing.v12.2;component/Themes/generic.xaml" />
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.Grid" ProductSource="/DevExpress.Xpf.Themes.LightGrayBasedTheme.v12.2;component/Themes.SL/Grid.SL.xaml" />
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.Ribbon" ProductSource="/DevExpress.Xpf.Ribbon.v12.2;component/Themes/generic.xaml"/>
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.Docking" ProductSource="/DevExpress.Xpf.Docking.v12.2;component/Themes/generic.xaml"/>
+        <dx:ProductResourceDictionary ProductAssembly="DevExpress.Xpf.Charts" ProductSource="/DevExpress.Xpf.Charts.v12.2;component/Themes/generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
